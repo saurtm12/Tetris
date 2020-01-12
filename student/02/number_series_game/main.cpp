@@ -10,8 +10,11 @@ int main()
     for (int i=1; i<=num; i++)
     {
         if ((i%3==0) &&(i%7==0))
-        {
-            cout<<"zip"<<endl <<"boing"<<endl;
+        {   if (i<=20) {
+            cout<<"zip"<<endl <<"boing"<<endl;}
+            else {
+                cout << "zip boing"<<endl;
+            }
         }
             else
         {
