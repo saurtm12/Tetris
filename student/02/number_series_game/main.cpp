@@ -11,21 +11,21 @@ int main()
     {
         if ((i%3==0) &&(i%7==0))
         {
-            cout<< endl <<"zip"<<endl <<"boing";
+            cout<<"zip"<<endl <<"boing"<<endl;
         }
             else
         {
             if (i%3 ==0)
             {
-                cout <<endl<<"zip";
+                cout <<"zip"<<endl;
             } else
                 {
                        if (i%7 ==0)
                 {
-                       cout << endl << "boing";
+                       cout << "boing"<< endl ;
             }else
                        {
-                           cout<<endl<<i;
+                           cout<<i<<endl;
                        }
 
             }
