@@ -7,6 +7,11 @@ int main()
     float mean = 0;
     cout << "From how many integer numbers you want to count the mean value? ";
     cin >>n;
+    if (n==0)
+    {
+        cout <<"Cannot count mean value from 0 numbers";
+        return 0;
+    }
     for (int i = 1; i<=n;i++)
     {
         cout <<"Input "<< i <<". number: ";
