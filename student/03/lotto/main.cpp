@@ -22,6 +22,11 @@ int main()
         return 0;
 
     }
+    if (dball > lball)
+    {
+        cout <<"The maximum number of drawn balls is the total amount of balls.";
+        return 0;
+    }
     float prob = factory(lball)/factory(dball)/factory(lball -dball);
     cout << "The probability of guessing all " << dball << " balls correctly is 1/" << (long)prob;
     return 0;
