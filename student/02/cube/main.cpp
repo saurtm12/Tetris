@@ -6,7 +6,7 @@ int main()
     int n;
     cout <<"Enter a number: ";
     cin>> n;
-    unsigned long long int temp = n;
+    long temp = n;
     int cube = n*n*n;
     temp = temp*temp*temp;
     if (cube == temp)
