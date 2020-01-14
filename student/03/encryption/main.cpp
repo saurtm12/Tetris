@@ -32,7 +32,7 @@ int main()
     }
 
     for (int i =0; i<len;i++)
-        array[S1[i]] =1;
+        array[(int)S1[i]] =1;
     int Check = 1;
     for (int i='a';i<='z';i++)
         if (array[i]==0)
@@ -54,13 +54,13 @@ int main()
     cout << "Enter the text to be encrypted: ";
     cin >>S;
     int en[S.length()];
-    for (int i =0;i <S.length();i++)
+    for (int i =0;i <(int)S.length();i++)
         en[i]= S[i];
-    for (int i = 0; i<S.length() ; i++)
+    for (int i = 0; i<(int)S.length() ; i++)
     {
-        en[i]=array[S[i]];
+        en[i]=array[(int)S[i]];
         }
-    for (int i = 0; i< S.length(); i++)
+    for (int i = 0; i< (int)S.length(); i++)
     {
         cout <<(char)en[i];
     }
