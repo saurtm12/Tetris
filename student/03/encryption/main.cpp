@@ -11,7 +11,7 @@ int main()
     if (len != 26)
     {
     cout << "Error! The encryption key must contain 26 characters.";
-            return 0;
+            return EXIT_FAILURE;
     }
 
 
