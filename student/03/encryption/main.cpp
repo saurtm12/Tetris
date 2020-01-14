@@ -60,6 +60,7 @@ int main()
     {
         en[i]=array[(int)S[i]];
         }
+    cout <<"Encrypted text: ";
     for (int i = 0; i< (int)S.length(); i++)
     {
         cout <<(char)en[i];
