@@ -45,6 +45,10 @@ bool is_arithmetic_series(std::vector < int >&  ints)
 }
 bool is_geometric_series(std::vector < int >&  ints)
 {
+    if (ints[0]==0)
+    {
+        return 0;
+    }
     float k= ints[1]/ints[0];
     int size = ints.size();
     for (int i =1; i<= size-2;i++)
