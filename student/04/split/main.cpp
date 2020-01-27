@@ -6,6 +6,30 @@
 // TODO: Implement split function here
 // Do not change main function
 
+std::vector < std::string > split(std::string line,char seperator,bool k=false)
+{
+    std::vector < std::string > strs;
+    int i=0;
+    int n = line.length();
+    while (i<n)
+    {
+            std ::string temp_string="";
+            while (line[i] != seperator && i <n)
+            {
+                temp_string += line[i];
+                i++;
+            }
+            strs.push_back(temp_string);
+            if (k)
+            {
+                while (line[i]==seperator)
+                    i++;
+            }
+            else {i++;}
+
+    }
+    return strs;
+}
 
 int main()
 {
