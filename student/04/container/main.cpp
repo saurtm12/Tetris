@@ -14,7 +14,8 @@ void read_integers(std::vector< int >& ints, int count)
 }
 bool same_values(std::vector< int >& ints)
 {
-    for (int i = 0;i  <= ints.size()-2 ;i++)
+    int size = ints.size();
+    for (int i = 0;i  <= size-2 ;i++)
         if (ints[i]!= ints[i+1])
         {
             return 0;
@@ -23,7 +24,8 @@ bool same_values(std::vector< int >& ints)
 }
 bool is_ordered_non_strict_ascending(std::vector < int >&  ints)
 {
-    for (int i = 0; i<=ints.size()-2; i++)
+    int size = ints.size();
+    for (int i = 0; i<=size-2; i++)
     {
         if (ints[i+1] <ints[i])
             return 0;
@@ -33,7 +35,8 @@ bool is_ordered_non_strict_ascending(std::vector < int >&  ints)
 bool is_arithmetic_series(std::vector < int >&  ints)
 {
      int k= ints[1]-ints[0];
-    for (int i =1; i<= ints.size()-2;i++)
+    int size = ints.size();
+    for (int i =1; i<= size-2;i++)
     {
         if (ints[i+1]-ints[i]!=k)
             return 0;
@@ -42,8 +45,9 @@ bool is_arithmetic_series(std::vector < int >&  ints)
 }
 bool is_geometric_series(std::vector < int >&  ints)
 {
-    int k= ints[1]/ints[0];
-    for (int i =1; i<= ints.size()-2;i++)
+    float k= ints[1]/ints[0];
+    int size = ints.size();
+    for (int i =1; i<= size-2;i++)
     {
         if (ints[i+1]/ints[i]!=k)
             return 0;
