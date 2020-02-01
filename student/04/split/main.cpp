@@ -14,18 +14,35 @@ std::vector < std::string > split(std::string line,char seperator,bool k=false)
     while (i<n)
     {
             std ::string temp_string="";
-            while (line[i] != seperator && i <n)
-            {
-                temp_string += line[i];
-                i++;
-            }
-            strs.push_back(temp_string);
             if (k)
             {
-                while (line[i]==seperator)
+                while (line[i]== seperator && i<n)
+                {
                     i++;
+                }
+                if (i>=n)
+                    return strs;
+                while (line[i]!= seperator && i<n)
+                {
+                temp_string += line[i];
+                i++;
+                }
+                strs.push_back(temp_string);
             }
-            else {i++;}
+            else
+            {
+                while (line[i]!= seperator && i<n)
+                {
+                    temp_string += line[i++];
+                }
+                strs.push_back(temp_string);
+                i++;
+                if (i== n && line[n-1]==seperator)
+                {
+                    strs.push_back("");
+                }
+            }
+
 
     }
     return strs;
@@ -41,7 +58,7 @@ int main()
 
     std::vector< std::string > parts  = split(line, separator);
     std::cout << "Splitted string including empty parts: " << std::endl;
-    for( auto part : parts ) {
+     for( auto part : parts ) {
         std::cout << part << std::endl;
     }
 
