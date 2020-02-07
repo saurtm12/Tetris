@@ -7,6 +7,17 @@ using namespace std;
 void produce_random_numbers(unsigned int lower, unsigned int upper)
 {
     // Implement your function here
+    string line="";
+    while (line!="q")
+    {
+        cout<<"Your drawn random number is "<< rand()%(upper-lower+1)+lower<<"\n";
+        cout<<"Press enter to continue or q to quit:";
+        getline(cin,line);
+        if (line=="q")
+        {
+             break;
+        }
+    }
 }
 
 int main()
