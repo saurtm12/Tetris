@@ -24,7 +24,7 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
     while (line!="q")
     {
         cout<<"Your drawn random number is "<< distr(gen)<<"\n";
-        cout<<"Press enter to continue or q to quit:";
+        cout<<"Press enter to continue or q to quit: ";
         getline(cin,line);
         cout<<"\n";
         if (line=="q")
