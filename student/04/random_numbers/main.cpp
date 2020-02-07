@@ -11,6 +11,7 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
     string seed_;
     cout<<"Enter a seed value or an empty line: ";
     getline(cin, seed_);
+    cout<<"\n";
     default_random_engine gen;
     if (seed_=="")
     {
@@ -25,6 +26,7 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
         cout<<"Your drawn random number is "<< distr(gen)<<"\n";
         cout<<"Press enter to continue or q to quit:";
         getline(cin,line);
+        cout<<"\n";
         if (line=="q")
         {
              break;
