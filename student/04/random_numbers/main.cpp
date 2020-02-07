@@ -8,9 +8,21 @@ void produce_random_numbers(unsigned int lower, unsigned int upper)
 {
     // Implement your function here
     string line="";
+    string seed_;
+    cout<<"Enter a seed value or an empty line: ";
+    getline(cin, seed_);
+    default_random_engine gen;
+    if (seed_=="")
+    {
+        gen.seed( time(NULL) );
+    }
+    else
+        gen.seed(stoi(seed_));
+    uniform_int_distribution<int> distr(lower, upper);
+
     while (line!="q")
     {
-        cout<<"Your drawn random number is "<< rand()%(upper-lower+1)+lower<<"\n";
+        cout<<"Your drawn random number is "<< distr(gen)<<"\n";
         cout<<"Press enter to continue or q to quit:";
         getline(cin,line);
         if (line=="q")
