@@ -34,9 +34,6 @@ void Board::print()
             }
             else
             {
-//                this->empty_pos.row = x;
-//                this->empty_pos.column= y;
-
 
                 std::cout << ".";
             }
@@ -58,8 +55,13 @@ void Board::my_shuffle( std::vector<unsigned int> &numbers, int seed)
         numbers.at(random_index) = temp;
     }
 }
-void Board::add_element_togrid(std::vector <unsigned int> numbers)
+void Board::add_element_togrid(std::vector <unsigned int> numbers,
+                               std::string choice , int seed )
 {
+    if (choice == "y")
+    {
+        this->my_shuffle(numbers, seed);
+    }
     int temp=0;
     for (int i =0; i < SIZE;i++)
     {
@@ -71,6 +73,85 @@ void Board::add_element_togrid(std::vector <unsigned int> numbers)
         grid_.push_back(temp_vector);
     }
 }
+bool Board::move_element(std::string command)
+{
+    int element_row, element_column;
+    if (command==command_up)
+    {
+        element_row= this->empty_pos_row++ ;
+        //this->empty_pos_row++;
+        element_column= this->empty_pos_column;
+    }
+    else if (command == command_down)
+    {
+        element_row= this->empty_pos_row;
+        this->empty_pos_row--;
+        element_column= this->empty_pos_column;
+    }
+    else if (command == command_left)
+    {
+        element_row= this->empty_pos_row ;
+        element_column= this->empty_pos_column ;
+        this->empty_pos_column--;
+    }
+    else if (command == command_right)
+    {
+        element_row= this->empty_pos_row ;
+        element_column= this->empty_pos_column ;
+        this->empty_pos_column++;
+    }
 
+
+    if (!(element_row<4 && element_row>=0
+            && element_column <4 &&element_column >=0))
+    {
+
+        return 0;
+    }
+    else
+    {
+        grid_.at(element_row).at(element_column) = grid_.at(empty_pos_row).at(empty_pos_column);
+        grid_.at(empty_pos_row).at(empty_pos_column)= EMPTY;
+        return 1;
+    }
+}
+int Board::initialize_empty_pointer()
+{
+    for (int i =0; i < SIZE; i++)
+        for (int j =0; j<SIZE; j++)
+        {
+            if (grid_.at(i).at(j) == EMPTY)
+            {
+                this->empty_pos_row = i;
+                this-> empty_pos_column = j;
+                return 0;
+            }
+        }
+    return 1;
+}
+int Board::check_solvability()
+    {
+
+    while ( this->empty_pos_row < SIZE-1)
+    {
+        this->move_element(command_up);
+    }
+
+    std::vector < unsigned int > temp_vector;
+    for (unsigned int i=0; i<SIZE; i++)
+        for (unsigned int j = 0; j<SIZE; j++){
+            unsigned int temp_int = this->grid_.at(i).at(j);
+            if (temp_int != 16)
+                temp_vector.push_back(temp_int);
+        }
+    unsigned int inversion=0;
+    for (unsigned int i=0; i<temp_vector.size()-1; i++)
+        for (unsigned int j = i+1; j<temp_vector.size(); j++)
+        {
+            if (temp_vector[i]>temp_vector[j])
+                inversion++;
+        }
+    return inversion % 2 == 0;
+}
 
 

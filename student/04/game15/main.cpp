@@ -23,9 +23,12 @@
 #include <vector>
 #include <algorithm>
 #include <bits/stdc++.h>
+#include <boost/algorithm/string.hpp>
+
+
 bool initializing_board(Board &board);
 bool proceed_choice(std::vector<unsigned int> &numbers, std::string choice, Board &board);
-
+int check_solvability(Board  &board);
 bool initializing_board(Board &board)
 {
 
@@ -35,7 +38,9 @@ bool initializing_board(Board &board)
     {
         std::cout << "Random initialization (y/n): ";
         std::getline(std::cin, random_choice);
-        if (random_choice == "y" || random_choice == "n")
+
+        boost::algorithm::to_lower(random_choice);
+        if (random_choice == no_command || random_choice == yes_command)
             break;
         else
             std::cout<< "Unknown choice: "+random_choice<<"\n";
@@ -47,8 +52,8 @@ bool initializing_board(Board &board)
     if (proceed_result ==0)
             return 0;
 
-    board.add_element_togrid(numbers);
 
+    board.initialize_empty_pointer();
     return 1;
 }
 
@@ -59,7 +64,7 @@ bool initializing_board(Board &board)
 
 bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice, Board &board)
 {
-    if (choice == "y")
+    if (choice == yes_command)
     {
             std::string seed_;
             std::cout<<"Enter a seed value (or an empty line): ";
@@ -76,8 +81,7 @@ bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice, Boa
             {
                 numbers.push_back(i+1);
             }
-
-            board.my_shuffle(numbers,seed);
+            board.add_element_togrid(numbers, yes_command, seed );
             return 1;
 
     }
@@ -91,23 +95,40 @@ bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice, Boa
                     std::cin >>temp;
                     numbers.push_back(temp);
                 }
-        std::vector < unsigned int> temp_numbers = numbers;
+        int test[SIZE*SIZE+1]={0};
+        for (unsigned int i = 0; i<numbers.size(); i++)
+            if (numbers[i]>=1 && numbers[i]<= SIZE*SIZE)
+            test[numbers[i]] = 1;
 
 
-        std::sort(temp_numbers.begin(), temp_numbers.end());
-        for (unsigned int i = 0; i < temp_numbers.size(); i++)
+
+        for (unsigned int i = 1; i <= numbers.size(); i++)
         {
-            if (temp_numbers[i] != i+1)
+            if ( test[i] != 1)
             {
-                std::cout<< "Number "<<i+1<<" is missing";
+                std::cout<< "Number "<<i<<" is missing";
                 return 0;
             }
         }
+        board.add_element_togrid(numbers);
+        return 1;
     }
-    return 1;
+
 
 }
 
+int playing_game(Board &board)
+{
+    while (true)
+    {
+        board.print();
+        while (true)
+        {
+            std::cout<<"Dir (command, number): ";
+
+        }
+    }
+}
 
 
 int main()
@@ -116,6 +137,18 @@ int main()
     bool proceeding_success  = initializing_board(board);
     if  (proceeding_success == 0)
         return EXIT_FAILURE;
-    board.print();
+   Board temp_board = board;
+
+   int solvability = temp_board.check_solvability();
+   if (solvability == 0)
+   {
+        std::cout<<"Game is not solvable. What a pity.";
+        return EXIT_SUCCESS;
+   }
+
+
+   std::cout<<"Game is solvable: Go ahead!";
+
+
     return EXIT_SUCCESS;
 }
