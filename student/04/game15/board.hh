@@ -1,16 +1,13 @@
-/* Game15 (or puzzle 15) : Template code
+/* Game15
  *
  * Class: Board
  *  Describes a two-dimensional grid for puzzle 15 with necessary functions.
  *
- * Program author ( Fill with your own info )
- * Name: Teemu Teekkari
- * Student number: 123456
- * UserID: teekkart ( Necessary due to gitlab folder naming. )
- * E-Mail: teemu.teekkari@tuni.fi
- *
- * Notes:
- *
+ * Program author
+ * Name: Nghia Duc Hong
+ * Student number: 292119
+ * UserID: vsduho
+ * E-Mail: duc.hong@tuni.fi
  * */
 
 #ifndef BOARD_HH
@@ -29,17 +26,22 @@ public:
 
     // Prints the game grid
     void print();
-
-    // More methods
-
-private:
+    struct empty_pos
+    {
+        int row;
+        int column;
+    };
     // Shuffles the numbers vector by using seed as a seed value
     void my_shuffle(std::vector<unsigned int>& numbers, int seed);
+    // More methods
+    void add_element_togrid(std::vector <unsigned int> ints);
+
+private:
+
 
     // Game grid for the 15 puzzle
     std::vector<std::vector<unsigned int>> grid_;
 
-    // More attributes/methods
 };
 
 #endif // BOARD_HH
