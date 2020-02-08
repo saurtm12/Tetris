@@ -21,9 +21,9 @@ const int SIZE = 4;
 const std::string no_command = "n";
 const std::string yes_command = "y";
 const std::string command_up="w",
-       command_down="s",
-       command_left="a",
-       command_right="d";
+                    command_down="s",
+                    command_left="a",
+                    command_right="d";
 class Board
 {
 public:
@@ -32,15 +32,18 @@ public:
     // and two initialize methods
     // 2. Implement two constructors, one for each initialization way
 
+    bool is_won();
     // Prints the game grid
     void print();
+
     int initialize_empty_pointer();
     int empty_pos_row,empty_pos_column;
 
     // More methods
     void add_element_togrid(std::vector <unsigned int> numbers,
                             std::string choice = no_command , int seed = time(NULL) );
-    bool move_element(std::string command);
+    bool move_element(std::string command, unsigned int compare = 0);
+
     int check_solvability();
 private:
     // Shuffles the numbers vector by using seed as a seed value

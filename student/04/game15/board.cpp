@@ -73,45 +73,55 @@ void Board::add_element_togrid(std::vector <unsigned int> numbers,
         grid_.push_back(temp_vector);
     }
 }
-bool Board::move_element(std::string command)
+bool Board::move_element(std::string command,unsigned int compare)
 {
     int element_row, element_column;
+    int TEMP_empty_pos_row= this->empty_pos_row
+            ,TEMP_empty_pos_column=empty_pos_column;
+
+
+
     if (command==command_up)
     {
-        element_row= this->empty_pos_row++ ;
-        //this->empty_pos_row++;
-        element_column= this->empty_pos_column;
+
+        element_row= TEMP_empty_pos_row++ ;
+        element_column= TEMP_empty_pos_column;
     }
     else if (command == command_down)
     {
-        element_row= this->empty_pos_row;
-        this->empty_pos_row--;
-        element_column= this->empty_pos_column;
+
+        element_row= TEMP_empty_pos_row--;
+        element_column= TEMP_empty_pos_column;
     }
     else if (command == command_left)
     {
-        element_row= this->empty_pos_row ;
-        element_column= this->empty_pos_column ;
-        this->empty_pos_column--;
+
+        element_row= TEMP_empty_pos_row ;
+        element_column= TEMP_empty_pos_column++ ;
     }
     else if (command == command_right)
     {
-        element_row= this->empty_pos_row ;
-        element_column= this->empty_pos_column ;
-        this->empty_pos_column++;
+
+        element_row= TEMP_empty_pos_row ;
+        element_column= TEMP_empty_pos_column-- ;
     }
 
 
-    if (!(element_row<4 && element_row>=0
-            && element_column <4 &&element_column >=0))
+    if (!(TEMP_empty_pos_row<4 && TEMP_empty_pos_row>=0
+            && TEMP_empty_pos_column <4 && TEMP_empty_pos_column >=0))
     {
 
         return 0;
     }
     else
     {
-        grid_.at(element_row).at(element_column) = grid_.at(empty_pos_row).at(empty_pos_column);
-        grid_.at(empty_pos_row).at(empty_pos_column)= EMPTY;
+        if (compare != 0  && grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column) != compare)
+            return 0;
+
+        grid_.at(element_row).at(element_column) = grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column);
+        grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column)= EMPTY;
+        this->empty_pos_row = TEMP_empty_pos_row;
+        this->empty_pos_column = TEMP_empty_pos_column;
         return 1;
     }
 }
@@ -123,7 +133,7 @@ int Board::initialize_empty_pointer()
             if (grid_.at(i).at(j) == EMPTY)
             {
                 this->empty_pos_row = i;
-                this-> empty_pos_column = j;
+                this->empty_pos_column = j;
                 return 0;
             }
         }
@@ -153,5 +163,19 @@ int Board::check_solvability()
         }
     return inversion % 2 == 0;
 }
+
+bool Board::is_won()
+{
+    std::vector <unsigned int > temp_vector;
+    for (unsigned int i=0; i<SIZE; i++)
+        for (unsigned int j = 0; j<SIZE; j++)
+        {
+                temp_vector.push_back(grid_.at(i).at(j));
+        }
+    for (unsigned int i; i <temp_vector.size();i++)
+        if (i+1 != temp_vector[i])
+            return 0;
+    return 1;
+        }
 
 

@@ -121,12 +121,46 @@ int playing_game(Board &board)
 {
     while (true)
     {
-        board.print();
         while (true)
         {
+            board.print();
+            if (board.is_won())
+            {
+                std::cout<<"You won!";
+                return 0;
+            }
             std::cout<<"Dir (command, number): ";
+            std::string dir, command, num_string;
+            std::getline(std::cin, dir);
+            command = dir[0];
+            if (command == command_up || command == command_down ||
+                    command == command_left || command ==command_right)
+            {
+                for (unsigned int i =2; i < dir.length(); i++)
+                    num_string += dir[i];
+                int compare_number = std::stoi(num_string);
+                if (compare_number >=1 && compare_number<=15)
+                    {
+                    bool move = board.move_element(command, compare_number);
+                    if (!move)
+                    {
+                        std::cout<<"Impossible direction: "<<command<<"\n";
+                    }
+                    }
+                    else
+                    std::cout<<"Invalid number: "<< compare_number<<"\n";
+            }
+            else if (command == "q")
+                return 0;
+            else
+            {
+                std::cout<<"Unknown command: "<<command<<"\n";
+            }
 
         }
+
+
+
     }
 }
 
@@ -147,8 +181,8 @@ int main()
    }
 
 
-   std::cout<<"Game is solvable: Go ahead!";
-
+   std::cout<<"Game is solvable: Go ahead!\n";
+   playing_game(board);
 
     return EXIT_SUCCESS;
 }
