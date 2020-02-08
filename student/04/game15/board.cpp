@@ -75,33 +75,27 @@ void Board::add_element_togrid(std::vector <unsigned int> numbers,
 }
 bool Board::move_element(std::string command,unsigned int compare)
 {
-    int element_row, element_column;
+    int element_row=0, element_column=0;
     int TEMP_empty_pos_row= this->empty_pos_row
-            ,TEMP_empty_pos_column=empty_pos_column;
-
-
+            ,TEMP_empty_pos_column=this->empty_pos_column;
 
     if (command==command_up)
     {
-
         element_row= TEMP_empty_pos_row++ ;
         element_column= TEMP_empty_pos_column;
     }
     else if (command == command_down)
     {
-
         element_row= TEMP_empty_pos_row--;
         element_column= TEMP_empty_pos_column;
     }
     else if (command == command_left)
     {
-
         element_row= TEMP_empty_pos_row ;
         element_column= TEMP_empty_pos_column++ ;
     }
     else if (command == command_right)
     {
-
         element_row= TEMP_empty_pos_row ;
         element_column= TEMP_empty_pos_column-- ;
     }
@@ -173,9 +167,12 @@ bool Board::is_won()
                 temp_vector.push_back(grid_.at(i).at(j));
         }
     for (unsigned int i; i <temp_vector.size();i++)
-        if (i+1 != temp_vector[i])
+    {
+        unsigned int temp = i+1;
+        if ( temp != temp_vector[i])
             return 0;
+    }
     return 1;
-        }
+}
 
 
