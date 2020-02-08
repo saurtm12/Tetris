@@ -58,7 +58,7 @@ void Board::my_shuffle( std::vector<unsigned int> &numbers, int seed)
 void Board::add_element_togrid(std::vector <unsigned int> numbers,
                                std::string choice , int seed )
 {
-    if (choice == "y")
+    if (choice == yes_command || choice == YES_command)
     {
         this->my_shuffle(numbers, seed);
     }

@@ -18,8 +18,8 @@
 #include <algorithm>
 #include <random>
 const int SIZE = 4;
-const std::string no_command = "n";
-const std::string yes_command = "y";
+const std::string no_command = "n", NO_command = "N";
+const std::string yes_command = "y", YES_command = "Y";
 const std::string command_up="w",
                     command_down="s",
                     command_left="a",

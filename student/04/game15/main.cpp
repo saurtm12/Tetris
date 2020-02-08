@@ -23,7 +23,6 @@
 #include <vector>
 #include <algorithm>
 #include <bits/stdc++.h>
-#include <boost/algorithm/string.hpp>
 
 
 bool initializing_board(Board &board);
@@ -39,8 +38,9 @@ bool initializing_board(Board &board)
         std::cout << "Random initialization (y/n): ";
         std::getline(std::cin, random_choice);
 
-        boost::algorithm::to_lower(random_choice);
-        if (random_choice == no_command || random_choice == yes_command)
+
+        if (random_choice == no_command || random_choice == yes_command
+                || random_choice == NO_command || random_choice == YES_command )
             break;
         else
             std::cout<< "Unknown choice: "+random_choice<<"\n";
@@ -64,7 +64,7 @@ bool initializing_board(Board &board)
 
 bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice, Board &board)
 {
-    if (choice == yes_command)
+    if (choice == yes_command || choice == YES_command)
     {
             std::string seed_;
             std::cout<<"Enter a seed value (or an empty line): ";
