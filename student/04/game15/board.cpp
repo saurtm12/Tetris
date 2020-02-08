@@ -166,7 +166,7 @@ bool Board::is_won()
         {
                 temp_vector.push_back(grid_.at(i).at(j));
         }
-    for (unsigned int i; i <temp_vector.size();i++)
+    for (unsigned int i=0; i <temp_vector.size();i++)
     {
         unsigned int temp = i+1;
         if ( temp != temp_vector[i])
