@@ -20,6 +20,98 @@
 
 const int EMPTY = 16;
 const unsigned int PRINT_WIDTH = 5;
+
+bool Board::initializing_board()
+{
+
+    // Select random choice of the user
+    std::string random_choice;
+
+    while (true)
+    {
+        std::cout << "Random initialization (y/n): ";
+        std::getline(std::cin, random_choice);
+
+
+        if (random_choice == no_command || random_choice == yes_command
+             || random_choice == NO_command || random_choice == YES_command )
+            break;
+        else
+            std::cout<< "Unknown choice: "+random_choice<<"\n";
+    }
+
+    std::vector <unsigned int> numbers;
+
+    int proceed_result = this->proceed_choice(numbers,random_choice);
+    if (proceed_result ==0)
+            return 0;
+
+
+    this->initialize_empty_pointer();
+    return 1;
+}
+
+bool Board::proceed_choice(std::vector <unsigned int> &numbers
+                           , std::string choice)
+{
+    if (choice == yes_command || choice == YES_command)
+    {
+            std::string seed_;
+            std::cout<<"Enter a seed value (or an empty line): ";
+            std::getline(std::cin,seed_);
+
+
+            int seed;
+            if (seed_ != "")
+                seed = std::stoi(seed_);
+            else
+                seed = (time (NULL) );
+
+            for (int i=0; i < SIZE*SIZE  ; i++)
+            {
+                numbers.push_back(i+1);
+            }
+            this->add_element_togrid(numbers, yes_command, seed );
+            return 1;
+
+    }
+    else
+    {
+        std::cout<< "Enter the numbers 1-16 "
+                    "in a desired order (16 means empty):\n";
+        for (int i=0; i<SIZE; i++)
+            for (int j =0; j<SIZE; j++)
+                {
+                    int temp;
+                    std::cin >>temp;
+                    numbers.push_back(temp);
+                }
+        std::string empty_string;
+        std::getline(std::cin,empty_string);
+
+
+        int test[SIZE*SIZE+1]={0};
+        for (unsigned int i = 0; i<numbers.size(); i++)
+            if (numbers[i]>=1 && numbers[i]<= SIZE*SIZE)
+            test[numbers[i]] = 1;
+
+
+
+        for (unsigned int i = 1; i <= numbers.size(); i++)
+        {
+            if ( test[i] != 1)
+            {
+                std::cout<< "Number "<<i<<" is missing";
+                return 0;
+            }
+        }
+        this->add_element_togrid(numbers);
+        return 1;
+    }
+
+
+}
+
 void Board::print()
 {
     for(unsigned int x = 0; x < SIZE; ++x)
@@ -109,10 +201,12 @@ bool Board::move_element(std::string command,unsigned int compare)
     }
     else
     {
-        if (compare != 0  && grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column) != compare)
+        if (compare != 0  &&
+                grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column) != compare)
             return 0;
 
-        grid_.at(element_row).at(element_column) = grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column);
+        grid_.at(element_row).at(element_column)
+                = grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column);
         grid_.at(TEMP_empty_pos_row).at(TEMP_empty_pos_column)= EMPTY;
         this->empty_pos_row = TEMP_empty_pos_row;
         this->empty_pos_column = TEMP_empty_pos_column;

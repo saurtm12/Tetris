@@ -31,7 +31,8 @@ public:
     // 1. Implement a constructor that fills the game grid with empties or such
     // and two initialize methods
     // 2. Implement two constructors, one for each initialization way
-
+    bool initializing_board();
+    bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice);
     bool is_won();
     // Prints the game grid
     void print();
