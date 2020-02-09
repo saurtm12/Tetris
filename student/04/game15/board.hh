@@ -27,24 +27,31 @@ const std::string command_up="w",
 class Board
 {
 public:
-    // For creating and initializing the grid, you have at least two choices:
-    // 1. Implement a constructor that fills the game grid with empties or such
-    // and two initialize methods
-    // 2. Implement two constructors, one for each initialization way
+    //initializing board and reading inputs
     bool initializing_board();
-    bool proceed_choice(std::vector <unsigned int> &numbers, std::string choice);
+    //is included in initializing that has parameter is an
+    //vector used for randomization or own user's use
+    // by using 2nd parameter is randomization choice
+    bool proceed_choice(std::vector <unsigned int> &numbers
+                        , std::string choice);
+    //check if we win
     bool is_won();
     // Prints the game grid
     void print();
-
+    //find the initial position of the EMPTY element
     int initialize_empty_pointer();
-    int empty_pos_row,empty_pos_column;
 
-    // More methods
+
+    // ADD element to grid that has a 1 dimentional vector to
+    // 2 dimentional vector (grid) by command and randomization
     void add_element_togrid(std::vector <unsigned int> numbers,
-                            std::string choice = no_command , int seed = time(NULL) );
+                            std::string choice = no_command
+            , int seed = time(NULL) );
+    //move an element which uses the current position of EMPTY element
+    // and based on command, parameter compare is confirm if the move
+    // is right
     bool move_element(std::string command, unsigned int compare = 0);
-
+    //check solvability
     int check_solvability();
 private:
     // Shuffles the numbers vector by using seed as a seed value
@@ -52,7 +59,8 @@ private:
 
     // Game grid for the 15 puzzle
     std::vector<std::vector<unsigned int>> grid_ ;
-
+    //store the position of EMPTY element
+    int empty_pos_row,empty_pos_column;
 };
 
 #endif // BOARD_HH
