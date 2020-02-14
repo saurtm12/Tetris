@@ -24,7 +24,10 @@ int main()
     unsigned int i = 1, n = str_vector.size();
     while (i<= n)
     {
-        output <<i<<" "<<str_vector[i-1];
+        output <<i<<" "<<str_vector[i-1]<<"\n";
+        i++;
     }
+    input.close();
+    output.close();
     return 0;
 }
