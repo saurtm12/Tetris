@@ -14,7 +14,7 @@ int main()
     if (!input_file)
     {
         std::cout<<"Error! The file "<<ifile_name <<" cannot be opened.";
-        return 0;
+        return EXIT_FAILURE;
     }
 
     map <std::string, int> score;
@@ -49,6 +49,6 @@ int main()
     }
 
     input_file.close();
-    return 0;
+    return EXIT_SUCCESS;
 
 }
