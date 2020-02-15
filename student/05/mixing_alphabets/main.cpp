@@ -11,7 +11,6 @@ int main()
     // function of the algorithm library to shuffle letters
     std::minstd_rand generator;
     generator.seed(time(NULL));
-    std:: uniform_int_distribution<int> distr(1, 100);
     std::cout << "Enter some text. Quit by entering the word \"END\"." << std::endl;
     std::string word;
 
@@ -26,13 +25,14 @@ int main()
             {
             v.push_back(chr);
             }
-
-      shuffle(v.begin()+1,v.end()-1,generator);
+       if (v.size()>1)
+            shuffle(v.begin()+1,v.end()-1,generator);
         std::string result="";
         for (auto chr: v)
             {
             result +=chr;
             }
+
 
         std::cout << result << std::endl;
     }
