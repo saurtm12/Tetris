@@ -22,11 +22,9 @@ bool palindrome_recursive(std::string s)
       if (s[0] != s[s.length()-1])
           return false;
       else {
-            std::string s1="";
-            for (unsigned int i = 1; i<s.length()-1; i++ )
-            {
-                s1+=s[i];
-            }
+            std::string s1;
+            s.pop_back();
+            s.erase(0,1);
             return palindrome_recursive(s1);
       }
   }
