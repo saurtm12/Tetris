@@ -33,14 +33,16 @@ int main()
                 word+= line[i++];
             }
             i++;
-        if (words.find(word) != words.end())
-        {
-            words.at(word).push_back(n_line);
-        }
-        else
-        {
-            words.insert({ word,{n_line} });
-        }
+
+            if (words.find(word) != words.end())
+            {
+                if (find(words.at(word).begin(),words.at(word).end() , n_line) == words.at(word).end())
+                    words.at(word).push_back(n_line);
+            }
+            else
+            {
+                words.insert({ word,{n_line} });
+            }
 
        }
      n_line++;
@@ -49,7 +51,6 @@ int main()
 
     map <std::string, vector<int>>:: iterator iter;
     vector <int> ::iterator iter_v;
-
 
     for (iter = words.begin(); iter != words.end(); iter++)
     {
