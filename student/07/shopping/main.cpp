@@ -76,6 +76,12 @@ bool add_product(std::map < std::string,
                  std::vector<std::string> strings);
 
 
+bool proceed_command(std::string command_line);
+bool chain_command(std::vector < std::string > strings_command);
+bool store_command(std::vector < std::string > strings_command);
+bool selection_command(std::vector < std::string > strings_command);
+bool cheapest_command(std::vector < std::string > strings_command);
+bool products_command(std::vector < std::string > strings_command);
 int main()
 {
     /*Declare container.
@@ -112,12 +118,27 @@ int main()
             return EXIT_FAILURE;
         }
     }
+    //proceeding user's command
+
+
+
 /*
     for (auto chain :Chains)
         for (auto store : chain.second)
             for (auto product : store.second)
                 std::cout<<chain.first<<" "<<store.first<< " " <<product.product_name<<" " <<product.price<<"\n";
 */
+    while (true)
+    {
+        std::cout<<"> ";
+        std::string command;
+        getline(std::cin, command);
+        if (command == "quit")
+        {
+            return EXIT_SUCCESS;
+        }
+        proceed_command(command);
+    }
 
 
     return EXIT_SUCCESS;
@@ -171,7 +192,6 @@ bool add_product(std::map < std::string,
     {
 
         Product_price =std::stod(strings.at(3));
-        std::cout<<Product_price<<"\n";
         //check if the price of a product must be a positive double. If not,
         //return FAIL value in processing add_product.
         if ( Product_price <= 0  )
@@ -228,3 +248,61 @@ bool add_product(std::map < std::string,
     }
     return SUCCESS;
 }
+
+
+bool proceed_command(std::string command_line)
+{
+    std::vector < std::string > strings_command = split(command_line,' ',true);
+    std::string command = strings_command.at(0);
+    if (command == "chains")
+    {
+        chain_command(strings_command);
+        return SUCCESS;
+    }
+    if (command == "stores")
+    {
+        store_command(strings_command);
+        return SUCCESS;
+    }
+    if (command == "selection")
+    {
+        selection_command(strings_command);
+        return SUCCESS;
+    }
+    if (command == "cheapest")
+    {
+        store_command(strings_command);
+        return SUCCESS;
+    }
+    if (command == "products")
+    {
+        products_command(strings_command);
+        return SUCCESS;
+    }
+
+    //if the command is not listed above, it is unknown command:
+    std::cout << "Error: unknown command: "<<command_line<<"\n";
+    return FAIL;
+}
+
+bool chain_command(std::vector < std::string > strings_command)
+{
+    return SUCCESS;
+}
+bool store_command(std::vector < std::string > strings_command)
+{
+    return SUCCESS;
+}
+bool selection_command(std::vector < std::string > strings_command)
+{
+    return SUCCESS;
+}
+bool cheapest_command(std::vector < std::string > strings_command)
+{
+    return SUCCESS;
+}
+bool products_command(std::vector < std::string > strings_command)
+{
+    return SUCCESS;
+}
+
