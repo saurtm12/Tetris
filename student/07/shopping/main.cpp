@@ -386,7 +386,7 @@ bool selection_command(std::vector < std::string > strings_command,
         {
             if (iter->price != out_of_stock)
                 std::cout<<iter->product_name<<" "
-                        <<iter->price<<"\n"<<std::setprecision(2);
+                        <<iter->price<<"\n"<<std::setprecision(3);
             else
                 std::cout<<iter->product_name<<" out of stock\n";
 
@@ -445,7 +445,7 @@ bool cheapest_command(std::vector < std::string > strings_command,
             return SUCCESS;
         }else
         {
-            std::cout<<std::setprecision(2)<<cheapest<<"\n"<<std::setprecision(2);
+            std::cout<<std::setprecision(3)<<cheapest << " euros"<<"\n";
 
             for (auto location : locations)
             {
