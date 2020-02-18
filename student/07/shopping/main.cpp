@@ -74,7 +74,10 @@ std::vector<std::string> split(const std::string& s,
 bool add_product(std::map < std::string,
                  std::map < std::string , std::vector < Product > > > & Chains,
                  std::vector<std::string> strings);
-
+bool Compare_two_Product(Product product1,Product product2)
+{
+    return product1.product_name.compare(product2.product_name);
+}
 
 bool proceed_command(std::string command_line,
                      std::map<std::string,
@@ -345,12 +348,43 @@ bool selection_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
+    if ( strings_command.size() != 3)
+    {
+       std::cout<<"Error: error in command cheapest \n";
+       return FAIL;
+    }
+    else
+    {
+        std::string Chain_name = strings_command[1],
+                    Store_name = strings_command[2];
+        if ( Chains.find(Chain_name) == Chains.end() )
+        {
+            std::cout<<"Error: unknown chain name\n";
+            return FAIL;
+        }
+        if ( Chains.at(Chain_name).find(Store_name)
+                == Chains.at(Chain_name).end() )
+        {
+            std::cout<<"Error: unknown store\n";
+            return FAIL;
+        }
+        std::vector <Product> ::iterator
+                iter_begin = Chains.at(Chain_name).at(Store_name).begin(),
+                iter_end = Chains.at(Chain_name).at(Store_name).end();
+        std::sort(iter_begin,iter_end,Compare_two_Product);
+        for ( std::vector <Product> ::iterator iter; iter != iter_end; iter++)
+        {
+            std::cout<<iter->product_name<<" "<<iter->price<<"\n"<<std::setprecision(2);
+        }
+    }
     return SUCCESS;
 }
+
 bool cheapest_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
+    if ( strings_command.size() != 2)
     return SUCCESS;
 }
 bool products_command(std::vector < std::string > strings_command,
