@@ -76,12 +76,24 @@ bool add_product(std::map < std::string,
                  std::vector<std::string> strings);
 
 
-bool proceed_command(std::string command_line);
-bool chain_command(std::vector < std::string > strings_command);
-bool store_command(std::vector < std::string > strings_command);
-bool selection_command(std::vector < std::string > strings_command);
-bool cheapest_command(std::vector < std::string > strings_command);
-bool products_command(std::vector < std::string > strings_command);
+bool proceed_command(std::string command_line,
+                     std::map<std::string,
+                     std::map<std::string, std::vector<Product> > > Chains);
+bool chain_command(std::vector < std::string > strings_command,
+    std::map < std::string,
+               std::map < std::string , std::vector < Product > > > Chains);
+bool store_command(std::vector < std::string > strings_command,
+    std::map < std::string,
+               std::map < std::string , std::vector < Product > > > Chains);
+bool selection_command(std::vector < std::string > strings_command,
+    std::map < std::string,
+               std::map < std::string , std::vector < Product > > > Chains);
+bool cheapest_command(std::vector < std::string > strings_command,
+    std::map < std::string,
+               std::map < std::string , std::vector < Product > > > Chains);
+bool products_command(std::vector < std::string > strings_command,
+    std::map < std::string,
+               std::map < std::string , std::vector < Product > > > Chains);
 int main()
 {
     /*Declare container.
@@ -137,7 +149,7 @@ int main()
         {
             return EXIT_SUCCESS;
         }
-        proceed_command(command);
+        proceed_command(command,Chains);
     }
 
 
@@ -250,33 +262,35 @@ bool add_product(std::map < std::string,
 }
 
 
-bool proceed_command(std::string command_line)
+bool proceed_command(std::string command_line,
+    std::map < std::string,
+                std::map < std::string , std::vector < Product > > > Chains)
 {
     std::vector < std::string > strings_command = split(command_line,' ',true);
     std::string command = strings_command.at(0);
     if (command == "chains")
     {
-        chain_command(strings_command);
+        chain_command(strings_command, Chains);
         return SUCCESS;
     }
     if (command == "stores")
     {
-        store_command(strings_command);
+        store_command(strings_command, Chains);
         return SUCCESS;
     }
     if (command == "selection")
     {
-        selection_command(strings_command);
+        selection_command(strings_command, Chains);
         return SUCCESS;
     }
     if (command == "cheapest")
     {
-        store_command(strings_command);
+        store_command(strings_command, Chains);
         return SUCCESS;
     }
     if (command == "products")
     {
-        products_command(strings_command);
+        products_command(strings_command, Chains);
         return SUCCESS;
     }
 
@@ -285,23 +299,42 @@ bool proceed_command(std::string command_line)
     return FAIL;
 }
 
-bool chain_command(std::vector < std::string > strings_command)
+bool chain_command(std::vector < std::string > strings_command,
+        std::map < std::string,
+                   std::map < std::string , std::vector < Product > > > Chains)
+{
+    if (strings_command.size() == 1)
+    {
+        for (auto chain : Chains)
+        {
+        std::cout<<chain.first<<"\n";
+        }
+        return SUCCESS;
+    }
+    else std::cout<< "Error: error in command chains";
+    return FAIL;
+}
+bool store_command(std::vector < std::string > strings_command,
+        std::map < std::string,
+                   std::map < std::string , std::vector < Product > > > Chains)
 {
     return SUCCESS;
 }
-bool store_command(std::vector < std::string > strings_command)
+bool selection_command(std::vector < std::string > strings_command,
+        std::map < std::string,
+                   std::map < std::string , std::vector < Product > > > Chains)
 {
     return SUCCESS;
 }
-bool selection_command(std::vector < std::string > strings_command)
+bool cheapest_command(std::vector < std::string > strings_command,
+        std::map < std::string,
+                   std::map < std::string , std::vector < Product > > > Chains)
 {
     return SUCCESS;
 }
-bool cheapest_command(std::vector < std::string > strings_command)
-{
-    return SUCCESS;
-}
-bool products_command(std::vector < std::string > strings_command)
+bool products_command(std::vector < std::string > strings_command,
+        std::map < std::string,
+                   std::map < std::string , std::vector < Product > > > Chains)
 {
     return SUCCESS;
 }
