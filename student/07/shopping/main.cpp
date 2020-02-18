@@ -318,7 +318,28 @@ bool store_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
-    return SUCCESS;
+    if (strings_command.size() == 2)
+    {
+        std::string Chain_name = strings_command.at(1);
+        if (Chains.find(Chain_name) == Chains.end())
+        {
+            std::cout<<"Error: unknown chain name\n";
+            return FAIL;
+        }
+        else
+        {
+            for (auto store : Chains.at(Chain_name))
+            {
+                std::cout<<store.first<<"\n";
+            }
+            return SUCCESS;
+        }
+    }else
+    {
+        std::cout<< "Error: error in command stores\n";
+        return FAIL;
+    }
+
 }
 bool selection_command(std::vector < std::string > strings_command,
         std::map < std::string,
