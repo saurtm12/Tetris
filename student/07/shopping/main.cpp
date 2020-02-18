@@ -29,11 +29,14 @@
 #include <vector>
 #include <map>
 #include <bits/stdc++.h>
+#include <set>
+
+
 
 //declare constant.
 const double out_of_stock = -1;
 const int SUCCESS = 0, FAIL = 1;
-
+const double MAX_DOUBLE = 1.79769e+308;
 //declare a stuct that contains information about product :
 struct Product
 {
@@ -288,7 +291,7 @@ bool proceed_command(std::string command_line,
     }
     if (command == "cheapest")
     {
-        store_command(strings_command, Chains);
+        cheapest_command(strings_command, Chains);
         return SUCCESS;
     }
     if (command == "products")
@@ -314,7 +317,7 @@ bool chain_command(std::vector < std::string > strings_command,
         }
         return SUCCESS;
     }
-    else std::cout<< "Error: error in command chains";
+    else std::cout<< "Error: error in command chains\n";
     return FAIL;
 }
 bool store_command(std::vector < std::string > strings_command,
@@ -344,16 +347,19 @@ bool store_command(std::vector < std::string > strings_command,
     }
 
 }
+
 bool selection_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
+
+
     if ( strings_command.size() != 3)
     {
-       std::cout<<"Error: error in command cheapest \n";
+       std::cout<<"Error: error in command selection \n";
        return FAIL;
     }
-    else
+     else
     {
         std::string Chain_name = strings_command[1],
                     Store_name = strings_command[2];
@@ -362,35 +368,116 @@ bool selection_command(std::vector < std::string > strings_command,
             std::cout<<"Error: unknown chain name\n";
             return FAIL;
         }
+
         if ( Chains.at(Chain_name).find(Store_name)
                 == Chains.at(Chain_name).end() )
         {
             std::cout<<"Error: unknown store\n";
             return FAIL;
         }
+
         std::vector <Product> ::iterator
                 iter_begin = Chains.at(Chain_name).at(Store_name).begin(),
                 iter_end = Chains.at(Chain_name).at(Store_name).end();
         std::sort(iter_begin,iter_end,Compare_two_Product);
-        for ( std::vector <Product> ::iterator iter; iter != iter_end; iter++)
+        for ( std::vector <Product> ::iterator iter
+               = Chains.at(Chain_name).at(Store_name).begin();
+               iter != iter_end; iter++)
         {
-            std::cout<<iter->product_name<<" "<<iter->price<<"\n"<<std::setprecision(2);
+            if (iter->price != out_of_stock)
+                std::cout<<iter->product_name<<" "
+                        <<iter->price<<"\n"<<std::setprecision(2);
+            else
+                std::cout<<iter->product_name<<" out of stock\n";
+
         }
+
     }
+
     return SUCCESS;
 }
+
+
 
 bool cheapest_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
     if ( strings_command.size() != 2)
+    {
+        std::cout<<"Error: error in command cheapest\n";
+        return FAIL;
+    }
+    else
+    {
+        std::string find_product = strings_command.at(1);
+        std::set < std::string>  locations;
+        double cheapest = MAX_DOUBLE;
+        bool exist_product =false;
+        for (auto chain :Chains)
+            for (auto store : chain.second)
+                for (auto product : store.second)
+                {
+                    if (product.product_name == find_product )
+                    {
+                        exist_product = true;
+
+                        if ( product.price == cheapest)
+                        {
+                            locations.insert( chain.first+" "+ store.first );
+                        }
+                        else if (product.price < cheapest && product.price != out_of_stock)
+                        {
+                            cheapest = product.price;
+                            locations.clear();
+                            locations.insert( chain.first+" "+ store.first );
+                        }
+                    }
+                }
+        if (!exist_product)
+        {
+            std::cout<<"The product is not part of product selection\n";
+            return FAIL;
+        }
+        else if (exist_product && cheapest == MAX_DOUBLE)
+        {
+            std::cout<<"The product is temporarily out of stock everywhere\n";
+            return SUCCESS;
+        }else
+        {
+            std::cout<<std::setprecision(2)<<cheapest<<"\n"<<std::setprecision(2);
+
+            for (auto location : locations)
+            {
+            std::cout<< location<<"\n";
+            }
+        }
+    }
     return SUCCESS;
 }
+
+
 bool products_command(std::vector < std::string > strings_command,
         std::map < std::string,
                    std::map < std::string , std::vector < Product > > > Chains)
 {
+    if (strings_command.size() != 1)
+    {
+        std::cout<<"Error: error in command products\n";
+        return FAIL;
+    }
+    std::set < std::string > products;
+    for (auto chain :Chains)
+        for (auto store : chain.second)
+            for (auto product : store.second)
+            {
+                if ( products.find(product.product_name) == products.end() )
+                {
+                    products.insert(product.product_name);
+                }
+            }
+    for (auto product : products)
+        std::cout<<product<<"\n";
     return SUCCESS;
 }
 
