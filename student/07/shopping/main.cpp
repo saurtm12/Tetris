@@ -136,16 +136,9 @@ int main()
             return EXIT_FAILURE;
         }
     }
+    input_file.close();
     //proceeding user's command
 
-
-
-/*
-    for (auto chain :Chains)
-        for (auto store : chain.second)
-            for (auto product : store.second)
-                std::cout<<chain.first<<" "<<store.first<< " " <<product.product_name<<" " <<product.price<<"\n";
-*/
     while (true)
     {
         std::cout<<"> ";
@@ -273,6 +266,11 @@ bool proceed_command(std::string command_line,
                 std::map < std::string , std::vector < Product > > > Chains)
 {
     std::vector < std::string > strings_command = split(command_line,' ',true);
+    if (command_line.size() == 0)
+    {
+        std::cout<<"Error: unknown command: \n";
+        return FAIL;
+    }
     std::string command = strings_command.at(0);
     if (command == "chains")
     {
@@ -385,8 +383,11 @@ bool selection_command(std::vector < std::string > strings_command,
                iter != iter_end; iter++)
         {
             if (iter->price != out_of_stock)
-                std::cout<<iter->product_name<<" "
-                        <<iter->price<<"\n"<<std::setprecision(3);
+            {
+                std::cout<<iter->product_name<<" ";
+                 printf("%.2f",iter->price);
+                 std::cout<<"\n";
+            }
             else
                 std::cout<<iter->product_name<<" out of stock\n";
 
@@ -445,7 +446,8 @@ bool cheapest_command(std::vector < std::string > strings_command,
             return SUCCESS;
         }else
         {
-            std::cout<<std::setprecision(3)<<cheapest << " euros"<<"\n";
+            printf("%.2f",cheapest);
+            std::cout << " euros"<<"\n";
 
             for (auto location : locations)
             {
