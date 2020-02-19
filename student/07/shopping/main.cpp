@@ -84,11 +84,36 @@ bool add_product(std::map < std::string,
  * Parameter : two Products that we want to compare.
  * RETURN false when the order of product_name of product 1
  *  is before product 2. And true when it happens in the opposite way.
+ * we compare the correspoding char of two string (two product name)
+ * then by order, we return the result compare them, if they are the same
+ * , continue to compare the next couple chars. Then if a string
+ * is a substring of the other, the substring is the one need to has the
+ * order before.
 */
+
 bool Compare_two_Product( Product product1,Product product2 )
 {
-    return product1.product_name.compare( product2.product_name );
+    int min_size;
+    std::string name1 = product1.product_name, name2 = product2.product_name;
+
+    //determine which string has shorter length.
+    if ( name1.size() > name2.size() )
+        min_size = name2.size();
+    else
+        min_size = name1.size();
+
+    for ( int i =0; i<= min_size; i++ )
+    {
+        if ( name1[i] < name2[i] )
+            return true;
+        if ( name1[i] > name2[i] )
+            return false;
+    }
+    //if it is the end of the shorter string, the one who has the shorter
+    //length is before.
+    return name1.size()<name2.size();
 }
+
 /*  This function proceed command, compares command with the used one,
  * then call them.
  * Parameter : a string is the whole line command.
