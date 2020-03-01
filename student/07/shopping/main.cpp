@@ -1,5 +1,5 @@
 /*
- * Desc:
+ * Description:
  * This  program aim to store all the information about the product of
  * different stores of different chain.
  * The program is able to read the input products given in files and
@@ -30,9 +30,8 @@
 #include <set>
 
 
-//declare constant.
 const double out_of_stock = -1;
-const int SUCCESS = false, FAIL = true;
+const int SUCCESS = true, FAIL = false;
 const double MAX_DOUBLE = 1.79769e+308;
 
 //declare a stuct that contains information about product :
@@ -93,7 +92,7 @@ bool add_product(std::map < std::string,
  * order before.
 */
 
-bool Compare_two_Product(const Product& product1,const Product& product2 )
+bool compareProducts(const Product& product1,const Product& product2 )
 {
     int min_size = 0;
     std::string name1 = product1.product_name, name2 = product2.product_name;
@@ -139,22 +138,22 @@ bool proceed_command(const std::string& command_line,
  *             Chains/ or reference Chains : the Data structure;
  * Return FAIL if the command is not recognised.
  *        SUCCESS if the command is conducted well.
- * We only have to use reference with selection_command because
+ * We only have to use reference with commandSelection because
  * we are going to sort the vector in the container.
 */
-bool chain_command(const std::vector < std::string >& strings_command,
+bool commandChain(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains);
-bool store_command(const std::vector < std::string >& strings_command,
+bool commandStore(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains);
-bool selection_command(const std::vector < std::string >& strings_command,
+bool commandSelection(const std::vector < std::string >& strings_command,
                  std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains);
-bool cheapest_command(const std::vector < std::string >& strings_command,
+bool commandCheapest(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains);
-bool products_command( const std::vector < std::string >& strings_command,
+bool commandProducts( const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains);
 
@@ -173,7 +172,7 @@ int main()
             std::map < std::string , std::vector < Product > > > Chains;
 
 
-    //Read the file.
+
     std::string ifile_name;
     std::cout<<"Input file: ";
     getline( std::cin, ifile_name );
@@ -184,7 +183,7 @@ int main()
         return EXIT_FAILURE;
     }
 
-   //if reading file success, then store them in the chosen container.
+   //store Products in the chosen container.
     std::string line ="";
     while ( getline( input_file,line ) )
     {
@@ -200,7 +199,6 @@ int main()
     input_file.close();
 
     //proceeding user's command
-    //if command = "quit", return EXIT_SUCCESS.
     while (true)
     {
         std::cout<<"> ";
@@ -276,13 +274,14 @@ bool add_product(std::map < std::string,
     {
         Product_price = std::stod( strings.at(3) );
         //check if the price of a product must be a positive double. If not,
-        //return FAIL value in processing add_product.
+        //return FAIL value.
         if ( Product_price <= 0  )
         {
         return FAIL;
         }
     }
-    //if notthing happen, then proceed adding information.
+
+    //if nothing happen, then proceed adding information.
     std::string Chain_name = strings.at(0),
                 Store_name = strings.at(1),
                 Product_name = strings.at(2);
@@ -356,27 +355,27 @@ bool proceed_command(const std::string& command_line,
 
     if ( command == "chains" )
     {
-        chain_command(strings_command, Chains);
+        commandChain(strings_command, Chains);
         return SUCCESS;
     }
     if ( command == "stores" )
     {
-        store_command(strings_command, Chains);
+        commandStore(strings_command, Chains);
         return SUCCESS;
     }
     if ( command == "selection" )
     {
-        selection_command(strings_command, Chains);
+        commandSelection(strings_command, Chains);
         return SUCCESS;
     }
     if ( command == "cheapest" )
     {
-        cheapest_command(strings_command, Chains);
+        commandCheapest(strings_command, Chains);
         return SUCCESS;
     }
     if ( command == "products" )
     {
-        products_command( strings_command, Chains );
+        commandProducts( strings_command, Chains );
         return SUCCESS;
     }
 
@@ -387,7 +386,7 @@ bool proceed_command(const std::string& command_line,
 
 /* Chain command is plainly list all the chains store in the keys of the map.
 */
-bool chain_command(const std::vector < std::string >& strings_command,
+bool commandChain(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains)
 {
@@ -399,6 +398,7 @@ bool chain_command(const std::vector < std::string >& strings_command,
         }
         return SUCCESS;
     }
+
     // if the command is  not appropriate :
     std::cout<< "Error: error in command chains\n";
     return FAIL;
@@ -407,7 +407,7 @@ bool chain_command(const std::vector < std::string >& strings_command,
 /* store command plainly lists all the stores that in a chain.
  * They are the keys of the value corresponding to the key is chain name.
 */
-bool store_command(const std::vector < std::string >& strings_command,
+bool commandStore(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains)
 {
@@ -436,7 +436,7 @@ bool store_command(const std::vector < std::string >& strings_command,
  * but also sort the vector which contains all of the product
  * of that store.
 */
-bool selection_command(const std::vector < std::string >& strings_command,
+bool commandSelection(const std::vector < std::string >& strings_command,
                  std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains)
 {
@@ -468,8 +468,8 @@ bool selection_command(const std::vector < std::string >& strings_command,
 
     //Because our STL container contains Products is a vector, we have
     //to sort them by name, and by the function implemented :
-    // Compare_two_product.
-    std::sort( iter_begin, iter_end, Compare_two_Product );
+    // compareProducts.
+    std::sort( iter_begin, iter_end, compareProducts );
     for ( std::vector <Product> ::iterator iter = iter_begin;
           iter != iter_end; iter++)
     {
@@ -500,7 +500,7 @@ bool selection_command(const std::vector < std::string >& strings_command,
  * with the same price, then insert it but the cheapest value is
  * not changed.
 */
-bool cheapest_command(const std::vector < std::string >& strings_command,
+bool commandCheapest(const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains)
 {
@@ -565,8 +565,9 @@ bool cheapest_command(const std::vector < std::string >& strings_command,
     return SUCCESS;
 }
 
-//Browsing all the stores, insert them in a set, then print all of them.
-bool products_command( const std::vector < std::string >& strings_command,
+//Browsing all the stores, insert Products.name in a set,
+//then print all of them.
+bool commandProducts( const std::vector < std::string >& strings_command,
            const std::map < std::string,
                  std::map < std::string , std::vector < Product > > >& Chains)
 {
