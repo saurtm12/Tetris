@@ -30,7 +30,7 @@
 #include <set>
 
 
-const double out_of_stock = -1;
+const double OUT_OF_STOCK = -1;
 const int SUCCESS = true, FAIL = false;
 const double MAX_DOUBLE = 1.79769e+308;
 
@@ -41,10 +41,10 @@ struct Product
     double price;
 
     //Constructor of the struct.
-    Product(std::string _product_name,double _price)
+    Product(std::string ini_product_name, double ini_price)
     {
-        product_name = _product_name;
-        price = _price;
+        product_name = ini_product_name;
+        price = ini_price;
     }
 
 };
@@ -65,8 +65,8 @@ std::vector< std::string > split(const std::string& s,
                                  bool ignore_empty = false);
 
 /* This function add product information into the chains.
- * parameter Chains:  reference for Chains, because we would like to
- * add information to STL Chains.
+ * parameter chains:  reference for chains, because we would like to
+ * add information to STL chains.
  * parameter strings: a vector that will have 4 element if the input file
  * works properly, contain the following element in order :
  * 1. Chain's name.
@@ -75,7 +75,7 @@ std::vector< std::string > split(const std::string& s,
  * 4. Corresponding price.
 */
 bool add_product(std::map < std::string,
-                 std::map < std::string , std::vector < Product > > > & Chains,
+                 std::map < std::string , std::vector < Product > > > & chains,
                  const std::vector<std::string >& strings);
 
 
@@ -121,13 +121,13 @@ bool compareProducts(const Product& product1,const Product& product2 )
 /*  This function proceed command, compares command with the used one,
  * then call them.
  * Parameter : a string is the whole line command.
- *             reference Chains : our database.
+ *             reference chains : our database.
  * RETURN FAIL when the command is unknown
  *        SUCCESS when command is proceeded successfully.
 */
 bool proceed_command(const std::string& command_line,
                       std::map<std::string,
-                      std::map<std::string, std::vector<Product> > >& Chains);
+                      std::map<std::string, std::vector<Product> > >& chains);
 
 
 /*Those functions do the command that user requires.
@@ -135,7 +135,7 @@ bool proceed_command(const std::string& command_line,
  * corresponding command.
  * Parameter : vector strings command includes the the seperated words in
  * commandline
- *             Chains/ or reference Chains : the Data structure;
+ *             chains/ or reference chains : the Data structure;
  * Return FAIL if the command is not recognised.
  *        SUCCESS if the command is conducted well.
  * We only have to use reference with commandSelection because
@@ -143,19 +143,19 @@ bool proceed_command(const std::string& command_line,
 */
 bool commandChain(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains);
+                 std::map < std::string , std::vector < Product > > >& chains);
 bool commandStore(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains);
+                 std::map < std::string , std::vector < Product > > >& chains);
 bool commandSelection(const std::vector < std::string >& strings_command,
                  std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains);
+                 std::map < std::string , std::vector < Product > > >& chains);
 bool commandCheapest(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains);
+                 std::map < std::string , std::vector < Product > > >& chains);
 bool commandProducts( const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains);
+                 std::map < std::string , std::vector < Product > > >& chains);
 
 
 
@@ -169,7 +169,7 @@ int main()
     is the struct: Product that this store contains.
     */
     std::map < std::string,
-            std::map < std::string , std::vector < Product > > > Chains;
+            std::map < std::string , std::vector < Product > > > chains;
 
 
 
@@ -188,7 +188,7 @@ int main()
     while ( getline( input_file,line ) )
     {
         std::vector< std::string> strings = split(line, ';', true);
-        bool current_status = add_product( Chains,strings );
+        bool current_status = add_product(chains, strings);
         if ( current_status == FAIL )
         {
             std::cout<<"Error: the input file has an erroneous line";
@@ -208,7 +208,7 @@ int main()
         {
             return EXIT_SUCCESS;
         }
-        proceed_command( command,Chains );
+        proceed_command( command,chains );
     }
 
 
@@ -245,7 +245,7 @@ std::vector<std::string> split( const std::string& s,
 /* This function add information from the file to the data structre.
  * Parameter : a vector  contains strings and should have size of 4:
  * Inlcuding all information of a  specific product.
- *             Chains : our data structure (use reference because we
+ *             chains : our data structure (use reference because we
  * want to change it)
  * RETURN FAIL if the file is not appropriate.
  *        SUCCESS if the file is read successfully.
@@ -254,8 +254,8 @@ std::vector<std::string> split( const std::string& s,
 //if not, insert them.
 
 bool add_product(std::map < std::string,
-                  std::map < std::string , std::vector < Product > > > & Chains,
-                  const std::vector<std::string> &strings)
+                  std::map < std::string , std::vector < Product > > >& chains,
+                  const std::vector<std::string>& strings)
 {
     //check if the vector contains 4 elements. If not, return FAIL value in
     //processing add_product.
@@ -268,7 +268,7 @@ bool add_product(std::map < std::string,
     double Product_price ;
     if ( strings[3] == "out-of-stock" )
         {
-        Product_price = out_of_stock;
+        Product_price = OUT_OF_STOCK;
         }
     else
     {
@@ -287,16 +287,16 @@ bool add_product(std::map < std::string,
                 Product_name = strings.at(2);
 
     //find if the chain has been stored, if not, insert the new chain.
-    if ( Chains.find( Chain_name) == Chains.end() )
+    if ( chains.find( Chain_name) == chains.end() )
     {
-        Chains.insert( { Chain_name, {} } );
+        chains.insert( { Chain_name, {} } );
     }
 
     //this iterator points to the current chain.
     std::map < std::string,
           std::map < std::string ,
             std::vector < Product > > > :: iterator
-            Chain_iter = Chains.find(Chain_name);
+            Chain_iter = chains.find(Chain_name);
 
     //find if the store has been added to the chain,
     //if not, insert a new store.
@@ -342,7 +342,7 @@ bool add_product(std::map < std::string,
 */
 bool proceed_command(const std::string& command_line,
                       std::map<std::string,
-                      std::map<std::string, std::vector<Product> > >& Chains)
+                      std::map<std::string, std::vector<Product> > >& chains)
 {
     std::vector < std::string > strings_command = split(command_line,' ',true);
     if ( command_line.size() == 0 )
@@ -355,27 +355,27 @@ bool proceed_command(const std::string& command_line,
 
     if ( command == "chains" )
     {
-        commandChain(strings_command, Chains);
+        commandChain(strings_command, chains);
         return SUCCESS;
     }
     if ( command == "stores" )
     {
-        commandStore(strings_command, Chains);
+        commandStore(strings_command, chains);
         return SUCCESS;
     }
     if ( command == "selection" )
     {
-        commandSelection(strings_command, Chains);
+        commandSelection(strings_command, chains);
         return SUCCESS;
     }
     if ( command == "cheapest" )
     {
-        commandCheapest(strings_command, Chains);
+        commandCheapest(strings_command, chains);
         return SUCCESS;
     }
     if ( command == "products" )
     {
-        commandProducts( strings_command, Chains );
+        commandProducts( strings_command, chains );
         return SUCCESS;
     }
 
@@ -388,11 +388,11 @@ bool proceed_command(const std::string& command_line,
 */
 bool commandChain(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains)
+                 std::map < std::string , std::vector < Product > > >& chains)
 {
     if ( strings_command.size() == 1 )
     {
-        for ( auto chain : Chains )
+        for ( auto chain : chains )
         {
         std::cout<<chain.first<<"\n";
         }
@@ -409,18 +409,18 @@ bool commandChain(const std::vector < std::string >& strings_command,
 */
 bool commandStore(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains)
+                 std::map < std::string , std::vector < Product > > >& chains)
 {
     if ( strings_command.size() == 2 )
     {
         std::string Chain_name = strings_command.at(1);
-        if ( Chains.find(Chain_name) == Chains.end() )
+        if ( chains.find(Chain_name) == chains.end() )
         {
             std::cout<<"Error: unknown chain name\n";
             return FAIL;
         }
 
-        for ( auto store : Chains.at(Chain_name) )
+        for ( auto store : chains.at(Chain_name) )
         {
             std::cout<<store.first<<"\n";
         }
@@ -438,7 +438,7 @@ bool commandStore(const std::vector < std::string >& strings_command,
 */
 bool commandSelection(const std::vector < std::string >& strings_command,
                  std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains)
+                 std::map < std::string , std::vector < Product > > >& chains)
 {
     if ( strings_command.size() != 3 )
     {
@@ -448,14 +448,14 @@ bool commandSelection(const std::vector < std::string >& strings_command,
     // if the command is appropriate ::
     std::string Chain_name = strings_command.at(1),
                 Store_name = strings_command.at(2);
-    if ( Chains.find(Chain_name) == Chains.end() )
+    if ( chains.find(Chain_name) == chains.end() )
     {
        std::cout<<"Error: unknown chain name\n";
        return FAIL;
     }
 
-    if ( Chains.at(Chain_name).find(Store_name)
-              == Chains.at(Chain_name).end() )
+    if ( chains.at(Chain_name).find(Store_name)
+              == chains.at(Chain_name).end() )
     {
        std::cout<<"Error: unknown store\n";
        return FAIL;
@@ -463,8 +463,8 @@ bool commandSelection(const std::vector < std::string >& strings_command,
 
     //if all the conditions satisfy, then print the list.
     std::vector <Product> ::iterator
-         iter_begin = Chains.at(Chain_name).at(Store_name).begin(),
-         iter_end = Chains.at(Chain_name).at(Store_name).end();
+         iter_begin = chains.at(Chain_name).at(Store_name).begin(),
+         iter_end = chains.at(Chain_name).at(Store_name).end();
 
     //Because our STL container contains Products is a vector, we have
     //to sort them by name, and by the function implemented :
@@ -473,7 +473,7 @@ bool commandSelection(const std::vector < std::string >& strings_command,
     for ( std::vector <Product> ::iterator iter = iter_begin;
           iter != iter_end; iter++)
     {
-       if ( iter->price != out_of_stock )
+       if ( iter->price != OUT_OF_STOCK )
        {
             std::cout<<iter->product_name<<" ";
             printf("%.2f",iter->price);
@@ -502,7 +502,7 @@ bool commandSelection(const std::vector < std::string >& strings_command,
 */
 bool commandCheapest(const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains)
+                 std::map < std::string , std::vector < Product > > >& chains)
 {
     if ( strings_command.size() != 2 )
     {
@@ -515,7 +515,7 @@ bool commandCheapest(const std::vector < std::string >& strings_command,
     std::set < std::string>  locations;
     double cheapest = MAX_DOUBLE;
     bool exist_product =false;
-    for ( auto chain :Chains )
+    for ( auto chain :chains )
     {
         for ( auto store : chain.second )
         {
@@ -529,7 +529,7 @@ bool commandCheapest(const std::vector < std::string >& strings_command,
                         locations.insert( chain.first+" "+ store.first );
                     }
                     else if ( product.price < cheapest
-                                  && product.price != out_of_stock )
+                                  && product.price != OUT_OF_STOCK )
                     {
                         cheapest = product.price;
                         locations.clear();
@@ -569,7 +569,7 @@ bool commandCheapest(const std::vector < std::string >& strings_command,
 //then print all of them.
 bool commandProducts( const std::vector < std::string >& strings_command,
            const std::map < std::string,
-                 std::map < std::string , std::vector < Product > > >& Chains)
+                 std::map < std::string , std::vector < Product > > >& chains)
 {
     if ( strings_command.size() != 1 )
     {
@@ -579,7 +579,7 @@ bool commandProducts( const std::vector < std::string >& strings_command,
 
     std::set < std::string > products;
 
-    for ( auto chain :Chains )
+    for ( auto chain :chains )
     {
         for ( auto store : chain.second )
         {
