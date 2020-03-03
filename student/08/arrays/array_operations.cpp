@@ -23,10 +23,9 @@ int greatest_v2(int* itemptr, int* endptr)
 }
 void copy(int* itemptr, int* endptr, int* targetptr)
 {
-    for ( auto iter = itemptr; itemptr != endptr; iter++)
+    for ( int i = 0; i< endptr -itemptr; i++ )
 {
-    *targetptr = *itemptr;
-    targetptr++;
+    *(targetptr+i) = *(itemptr+i);
 
 }
 }
@@ -36,7 +35,7 @@ void reverse(int* leftptr, int* rightptr)
     for (auto i = 0; i <= int(d/2) ; i++ )
     {
         auto temp = *(leftptr+i);
-        *(leftptr+i)= *(rightptr-i);
+        *(leftptr+i)= *(rightptr-i-1);
         *(rightptr-i) = temp;
     }
 }
