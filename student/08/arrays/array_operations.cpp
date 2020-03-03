@@ -36,7 +36,7 @@ void reverse(int* leftptr, int* rightptr)
        {
            auto temp = *(leftptr+i);
            *(leftptr+i)= *(rightptr-i-1);
-           *(rightptr-i) = temp;
+           *(rightptr-i-1) = temp;
        }
 
 }
