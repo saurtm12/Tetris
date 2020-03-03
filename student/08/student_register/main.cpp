@@ -157,12 +157,23 @@ int main() {
                    if (k)
                         (*iter->second).phone_number = new_phonenumber;
                    else
-                       std::cout<<"Erroneous phone number: "<<new_phonenumber<<std::endl;
+
+                       std::cout<<"\nErroneous phone number: "<<new_phonenumber<<std::endl;
                }
                std::cout<<std::endl;
 
 
         } else if(command == "Q" or command == "q") {
+            std::ofstream file_object(file_name);
+            for (auto student : student_numbers)
+            {
+                auto temp =*student.second;
+                file_object<<temp.student_number<<";"<<temp.user_id<<";"<<
+                             temp.name<<";"<<temp.phone_number<<";"<<temp.email<<
+                             ";"<<temp.skype<<"\n";
+            }
+            file_object.close();
+
             // Deleting the data structure: deallocating memory and nullifying pointers
             for(auto pair: student_numbers) {
                 pair.second = nullptr;
