@@ -30,6 +30,7 @@ int main() {
 
     for(int* position = target_array; position < target_array + ITEM_NUMBER; ++position){
         cout << *position << " ";
+        cout<<1;
     }
     cout << endl;
 
@@ -40,4 +41,5 @@ int main() {
         cout << *position << " ";
     }
     cout << endl;
+
 }
