@@ -165,7 +165,7 @@ int main() {
 
         } else if(command == "Q" or command == "q") {
             std::ofstream file_object(file_name);
-            for (auto student : student_numbers)
+            for (auto student : user_ids)
             {
                 auto temp =*student.second;
                 file_object<<temp.student_number<<";"<<temp.user_id<<";"<<
