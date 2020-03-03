@@ -32,10 +32,11 @@ void copy(int* itemptr, int* endptr, int* targetptr)
 void reverse(int* leftptr, int* rightptr)
 {
     int d = rightptr - leftptr;
-    for (auto i = 0; i <= int(d/2) ; i++ )
-    {
-        auto temp = *(leftptr+i);
-        *(leftptr+i)= *(rightptr-i-1);
-        *(rightptr-i) = temp;
-    }
+       for (int i = 0; i <= int(d/2) ; i++ )
+       {
+           auto temp = *(leftptr+i);
+           *(leftptr+i)= *(rightptr-i-1);
+           *(rightptr-i) = temp;
+       }
+
 }
