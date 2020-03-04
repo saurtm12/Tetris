@@ -1,14 +1,14 @@
 /*
  * Description:
- * This  program aim to store all the information about the product of
- * different stores of different chain.
+ * This  program aim to store all the information about the products of
+ * different stores of different chains.
  * The program is able to read the input products given in files and
  * store them in containers, which product has information about its
  * name, price  or OUT OF STOCK.
  * Some main functions that program may do are listing all the chains,
  * listing all the stores of a chain, print status/price of a specific
- * product of a store, listing all the product and find the cheapest
- * place which sells a product.
+ * product of a store, listing all the products and find the cheapest
+ * places which sells a product.
  *
  *
  * Program author
@@ -34,7 +34,7 @@ const double OUT_OF_STOCK = -1;
 const int SUCCESS = true, FAIL = false;
 const double MAX_DOUBLE = 1.79769e+308;
 
-//declare a stuct that contains information about product :
+//declare a struct that contains information about product :
 struct Product
 {
     std::string product_name;
@@ -118,7 +118,7 @@ bool compareProducts(const Product& product1,const Product& product2 )
     return name1.size() < name2.size();
 }
 
-/*  This function proceed command, compares command with the used one,
+/*  This function proceeds command, compares command with the used one,
  * then call them.
  * Parameter : a string is the whole line command.
  *             reference chains : our database.
