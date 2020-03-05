@@ -1,5 +1,4 @@
 #include "cards.hh"
-#include <vector>
 // TODO: Implement the methods here
 Cards::Cards()
 {
@@ -76,17 +75,7 @@ bool Cards::top_to_bottom()
     return true;
 }
 void Cards::print_from_bottom_to_top(std::ostream& s){
-    std::vector < Card_data* > vec;
-    Card_data* card = top_;
-    while (card!= nullptr)
-    {
-        vec.push_back(card);
-        card = card->next;
-    }
-    for (int i = vec.size()-1; i>= 0; i--)
-    {
-        s<<vec.size()-i<<": "<<vec.at(i)->data<<std::endl;
-    }
+    recursive_print(top_, s,1);
 }
 Cards::~Cards()
 {
@@ -98,12 +87,13 @@ Cards::~Cards()
         delete card;
     }
 }
-int Cards::recursive_print(Card_data* top, std::ostream& s)
+int Cards::recursive_print(Card_data* top, std::ostream& s, int i)
 {
-    if (top_ == nullptr)
+    if (top == nullptr)
         return 0;
-    s<<top->data;
-    return recursive_print(top->next,s);
+    recursive_print(top->next,s,i+1);
+    s<<i<<": "<<top->data<<std::endl;
+    return 0;
 
 }
 
