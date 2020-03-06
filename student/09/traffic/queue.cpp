@@ -60,7 +60,7 @@ void Queue::switch_light()
         std::cout<<"No vehicles waiting in traffic lights\n";
         return;
     }
-    std::cout<<"Vehicle(s)";
+    std::cout<<"Vehicle(s) ";
     if (length_ <= cycle_)
     {
         while (first_ != nullptr)
