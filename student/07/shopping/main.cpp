@@ -75,7 +75,7 @@ std::vector< std::string > split(const std::string& s,
  * 4. Corresponding price.
 */
 bool add_product(std::map < std::string,
-                 std::map < std::string , std::vector < Product > > > & chains,
+                 std::map < std::string , std::vector < Product > > >& chains,
                  const std::vector<std::string >& strings);
 
 
