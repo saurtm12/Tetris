@@ -22,5 +22,5 @@ double division(double left, double right) {
 
 double power(double left, double right)
 {
-    return power(left,right);
+    return pow(left,right);
 }
