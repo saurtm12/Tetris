@@ -57,7 +57,10 @@ const vector<Command> COMMANDS = {
     {"STOP", 0, true, nullptr},
     {"QUIT", 0, true, nullptr},
     {"EXIT", 0, true, nullptr},
-    {"Q", 0, true, nullptr}
+    {"Q", 0, true, nullptr},
+    {"POWER",2,false,power},
+    {"^",2,false,power},
+    {"EXP",2,false,power}
 };
 
 
@@ -113,7 +116,10 @@ int main() {
                         break;
                     }
                     if (oper.exit)
+                    {
+                        std::cout<<"Thanks and see you later!";
                         return 0;
+                    }
                     double i=0,j=0;
                     string_to_double(pieces.at(1),i);
                     //std::cout<<i<<"\n";
