@@ -27,6 +27,7 @@ int main() {
     cout << endl << "reverse" << endl;
     deck.reverse();
 
+
     cout << endl << "print" << endl;
     deck.print(cout);
 

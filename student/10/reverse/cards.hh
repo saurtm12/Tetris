@@ -21,15 +21,18 @@ class Cards {
       // Removes the topmost card and passes it in the reference parameter id.
       // Returns false, if the data structure is empty, otherwise returns true.
       bool remove(int& id);
-
+      void add_bottom(int x);
       // Reverses the content of the data structure as opposite.
       void reverse();
 
     private:
+
       struct Card_data {
         int data;
         std::shared_ptr<Card_data> next;
       };
+    //  bool insert_bottom(int &x);
+
 
       std::shared_ptr<Card_data> top_;
 };
