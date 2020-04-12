@@ -4,23 +4,18 @@
 Date::Date(unsigned int day, unsigned int month, unsigned int year):
     day_(day), month_(month), year_(year)
 {
-
-
-    if ( month_ > 12 || month_ < 1){
-        month_ = 1;
-    }
     if (is_leap_year() && day == 29 && month == 2 )
     {
-        return;
+        if ( month_ > 12 || month_ < 1){
+        month_ = 1;
     }
-    if ( day_ > month_sizes[month_ - 1]
-         || (month_ == 2 && is_leap_year()
-             && day > month_sizes[month - 1 ] + 1) ){
+        if ( day_ > month_sizes[month_ - 1]
+            || (month_ == 2 && is_leap_year()
+                 && day > month_sizes[month - 1 ] + 1) ){
         day_ = 1;
+        }
     }
-
 }
-
 Date::~Date()
 {
 
