@@ -27,13 +27,16 @@ const std::string INDENT = "    ";
 class Instance
 {
 public:
-    Instance();
+    Instance(Course* course_, std::string instance_name_, Date start_date_);
     ~Instance();
     void print();
     void print_students();
     bool is_named(std::string name);
 private:
-
+    Course* course_of;
+    std::string instance_name;
+    std::vector<Account*> signups;
+    Date start_date;
 };
 
 #endif // INSTANCE_HH
