@@ -28,6 +28,10 @@ class Instance
 {
 public:
     Instance();
+    ~Instance();
+    void print();
+    void print_students();
+    bool is_named(std::string name);
 private:
 
 };
