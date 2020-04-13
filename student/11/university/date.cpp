@@ -4,7 +4,7 @@
 Date::Date(unsigned int day, unsigned int month, unsigned int year):
     day_(day), month_(month), year_(year)
 {
-    if (is_leap_year() && day == 29 && month == 2 )
+    if (!(is_leap_year() && day == 29 && month == 2 ))
     {
         if ( month_ > 12 || month_ < 1){
         month_ = 1;
