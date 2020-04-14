@@ -12,6 +12,7 @@
 
 #include "account.hh"
 #include "date.hh"
+#include "utils.hh"
 #include <vector>
 #include <iostream>
 #include <string>
@@ -27,16 +28,47 @@ const std::string INDENT = "    ";
 class Instance
 {
 public:
-    Instance(Course* course_, std::string instance_name_, Date start_date_);
+    Instance(Course* course_, std::string instance_name_, Date start_date_ = utils::today);
     ~Instance();
-    void print();
-    void print_students();
-    bool is_named(std::string name);
+
+    /**
+     * @brief print instance's info.
+     */
+    void print() const;
+
+    /**
+     * @brief listing all students who are attending instance.
+     */
+    void print_students() const;
+
+    /**
+     * @brief compare the instance names.
+     * @return true if they are identical, if not, false.
+     */
+    bool is_named(const std::string name) const;
+    
+    /**
+     * @brief add a student to an instance.
+     * @return true if add student successfully,
+     *  if the student is current in the instance, return false.
+     */
+    bool add_student(Account* new_student);
+
+    /**
+     * @brief complete a student from the instance.
+     */
+    void complete_student(Account* student);
+
+    /**
+     * @brief print the intance that helps in the PRINT_STUDY_STATE
+     */
+    void print_instance() const;
+
 private:
-    Course* course_of;
-    std::string instance_name;
-    std::vector<Account*> signups;
-    Date start_date;
+    Course* course_of_;
+    std::string instance_name_;
+    std::vector<Account*> signups_;
+    Date start_date_;
 };
 
 #endif // INSTANCE_HH
