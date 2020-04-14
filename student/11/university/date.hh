@@ -26,7 +26,7 @@ public:
     // default value of 1 is used instead.
     Date(unsigned int day, unsigned int month, unsigned int year);
     ~Date();
-
+    Date( const Date &obj);
     // Calls the advance_by with default PERIOD_LENGTH
     void advance_by_period_length();
 

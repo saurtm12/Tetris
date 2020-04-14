@@ -21,6 +21,13 @@ Date::~Date()
 
 }
 
+Date::Date( const Date &obj)
+{
+    day_ = obj.day_;
+    month_ = obj.month_;
+    year_ = obj.year_;
+}
+
 void Date::advance_by_period_length()
 {
     advance_by(PERIOD_LENGTH);
