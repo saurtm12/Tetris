@@ -64,6 +64,7 @@ public:
      */
     void print_course_info() const;
 
+    Course* get_course_ptr() const;
 private:
     Course* course_of_;
     std::string instance_name_;

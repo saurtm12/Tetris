@@ -65,3 +65,8 @@ void Instance::print_course_info() const
     course_of_->print_info(false);
     std::cout<< " " << instance_name_ << "\n";
 }
+
+Course* Instance::get_course_ptr() const
+{
+    return course_of_;
+}
