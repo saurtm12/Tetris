@@ -34,11 +34,14 @@ class Instance
 {
 public:
     Instance(Course* course_, std::string instance_name_, Date start_date_ );
+    
+    //destructor
     ~Instance();
 
     //disable operator= and copy constructor
     Instance(const Instance& initial_value) = delete;
     Instance& operator=(const Instance& assignable_value) = delete;
+
     /**
      * @brief print instance's info.
      */
