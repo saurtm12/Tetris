@@ -1,4 +1,14 @@
 /* Class: Account
+  Course : TIE-02201
+  Student's name : Hong Nghia Duc
+  Student No : 292119
+  Modify in this file : 
+    *Add functions
+      -print_complete_courses()
+      -print_study_state()
+      -add_instance(Instance* instance)
+      -complete_instance(Instance* instance)
+    *Add a private variable : credit_ to store the total credits have been earned
   * ----------
   * Defines a student or a staff account in the university system.
   *
@@ -62,8 +72,9 @@ public:
     /**
      * @brief use to finish an instance
      * @param instance as "the instance need to be completed"
+     * @return true if complete successfully, if not, return false
      */
-    void complete_instance(Instance* instance);
+    bool complete_instance(Instance* instance);
 
 private:
     std::string full_name_;
