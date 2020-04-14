@@ -62,7 +62,7 @@ public:
     /**
      * @brief print the intance that helps in the PRINT_STUDY_STATE
      */
-    void print_instance() const;
+    void print_course_info() const;
 
 private:
     Course* course_of_;

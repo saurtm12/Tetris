@@ -61,7 +61,7 @@ void Instance::complete_student(Account* student)
     signups_.erase(iter);
 }
 
-void Instance::print_instance() const
+void Instance::print_course_info() const
 {
     course_of_->print_info(false);
     std::cout<< " " << instance_name_ << "\n";
