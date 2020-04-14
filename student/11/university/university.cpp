@@ -106,7 +106,6 @@ void University::add_instance(Params params)
         std::cout << INSTANCE_EXISTS << "\n";
         return;
     }
-
     Course* course = courses_.at(params.at(0));
     Instance* new_instance = new Instance(course, params.at(1), utils::today );
     courses_.at(params.at(0))->new_instance(new_instance);
@@ -136,7 +135,7 @@ void University::sign_up_on_course(Params params)
         return;
     }
 
-    if ( sign_up_instance->add_student(account_iter->second) )
+    if ( sign_up_instance->add_student(account_iter->second,utils::today) )
     {
         account_iter->second->add_instance(sign_up_instance);
     }
