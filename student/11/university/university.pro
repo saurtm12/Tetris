@@ -2,7 +2,7 @@ TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
-SOURCES += "C:\Users\mroff\Documents\prg2\vsduho\student\11\university"
+
 SOURCES += \
     main.cpp \
     date.cpp \

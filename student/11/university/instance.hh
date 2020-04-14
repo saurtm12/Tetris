@@ -71,7 +71,7 @@ public:
 
     Course* get_course_ptr() const;
 private:
-    Course* course_of_ = nullptr;
+    Course* course_of_;
     std::string instance_name_;
     std::vector<Account*> signups_;
     const Date start_date_;
