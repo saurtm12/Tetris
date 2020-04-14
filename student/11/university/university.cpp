@@ -174,7 +174,12 @@ void University::complete_course(Params params)
 
 void University::print_signups(Params params)
 {
-    
+    auto iter = courses_.find(params.at(0));
+    if ( iter  == courses_.end() ){
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
+    iter->second->print_signups();
 }
 
 void University::print_study_state(Params params)
