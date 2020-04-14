@@ -120,10 +120,10 @@ void University::sign_up_on_course(Params params)
         return;
     }
 
-    Instance* sign_up_inst = nullptr;
-    sign_up_inst = courses_.at(params.at(0))->get_instance(params.at(1));
+    Instance* sign_up_instance = nullptr;
+    sign_up_instance = courses_.at(params.at(0))->get_instance(params.at(1));
 
-    if ( sign_up_inst == nullptr )
+    if ( sign_up_instance == nullptr )
     {
         std::cout << CANT_FIND << params.at(1) << "\n";
         return;
@@ -135,9 +135,9 @@ void University::sign_up_on_course(Params params)
         return;
     }
 
-    if ( sign_up_inst->add_student(accounts_.at(std::stoi(params.at(2)))) )
+    if ( sign_up_instance->add_student(accounts_.at(std::stoi(params.at(2)))) )
     {
-        accounts_.at(std::stoi(params.at(2)))->add_instance(sign_up_inst);
+        accounts_.at(std::stoi(params.at(2)))->add_instance(sign_up_instance);
     }
 }
 
