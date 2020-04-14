@@ -84,7 +84,7 @@ private:
     const int account_number_;
 
     //store credist have been earned.
-    int credit_;
+    int credit_ = 0;
 
     std::vector<Instance*> current_;
     std::vector<Course*> completed_;
