@@ -1,3 +1,15 @@
+/*
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+    Modify in this file:
+    - Implement add_instance(Params params)
+    - Implement sign_up_on_course(Params params)
+    - Implement complete_course(Params params)
+    - Implement print_signups(Params params)
+    - Implement print_study_state(Params params)
+    - Implement print_completed(Params params)
+*/
 #include "university.hh"
 
 University::University():running_number_(111111)

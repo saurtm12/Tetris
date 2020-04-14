@@ -1,4 +1,9 @@
 /* Class: Instance
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+    This Instance class is implemented with functions that have
+    been declared in this file.
  * ----------
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
@@ -66,7 +71,7 @@ public:
 
     Course* get_course_ptr() const;
 private:
-    Course* course_of_;
+    Course* course_of_ = nullptr;
     std::string instance_name_;
     std::vector<Account*> signups_;
     const Date start_date_;

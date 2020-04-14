@@ -1,3 +1,9 @@
+/*
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+    This file defines functions that I declare in file instance.hh
+*/
 #include "instance.hh"
 #include "course.hh"
 Instance::Instance(Course* course, std::string instance_name, Date start_date ):
