@@ -45,7 +45,7 @@ public:
      * @brief compare the instance names.
      * @return true if they are identical, if not, false.
      */
-    bool is_named(const std::string name) const;
+    bool is_named(const std::string& name) const;
     
     /**
      * @brief add a student to an instance.

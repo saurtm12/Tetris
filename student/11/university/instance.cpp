@@ -32,7 +32,7 @@ void Instance::print_students() const
     }
 }
 
-bool Instance::is_named(const std::string name) const
+bool Instance::is_named(const std::string& name) const
 {
     return instance_name_ == name;
 }
