@@ -184,12 +184,22 @@ void University::print_signups(Params params)
 
 void University::print_study_state(Params params)
 {
-    
+    auto iter = accounts_.find(std::stoi(params.at(0)));
+    if ( iter == accounts_.end() ){
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
+    iter->second->print_study_state();
 }
 
 void University::print_completed(Params params)
 {
-
+    auto iter = accounts_.find(std::stoi(params.at(0)));
+    if ( iter == accounts_.end() ){
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
+    iter->second->print_complete_courses();
 }
 
 void University::set_date(Params params)
