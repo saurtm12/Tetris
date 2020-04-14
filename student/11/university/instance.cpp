@@ -44,8 +44,7 @@ bool Instance::add_student(Account* new_student)
     {
         return false;
     }
-    if (start_date_ < utils::today ||
-            start_date_ == utils::today)
+    if (start_date_ < utils::today )
     {
         std::cout << LATE << std::endl;
         return false;
