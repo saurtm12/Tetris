@@ -52,7 +52,7 @@ public:
      * @return true if add student successfully,
      *  if the student is current in the instance, return false.
      */
-    bool add_student(Account* new_student);
+    bool add_student(Account* new_student, const Date& sign_up_date);
 
     /**
      * @brief complete a student from the instance.

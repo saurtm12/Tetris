@@ -37,7 +37,7 @@ bool Instance::is_named(const std::string& name) const
     return instance_name_ == name;
 }
 
-bool Instance::add_student(Account* new_student)
+bool Instance::add_student(Account* new_student,const Date& sign_up_date)
 {
     auto iter = std::find(signups_.begin(), signups_.end(), new_student);
     if ( iter != signups_.end())
@@ -45,7 +45,7 @@ bool Instance::add_student(Account* new_student)
         std::cout << ALREADY_REGISTERED << "\n";
         return false;
     }
-    if ( start_date_ < utils::today )
+    if ( start_date_ < sign_up_date )
     {
         std::cout << LATE << "\n";
         return false;
