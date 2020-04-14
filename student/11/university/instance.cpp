@@ -21,14 +21,14 @@ Instance::~Instance()
 
 void Instance::print() const
 {
-    std::cout<< instance_name_ << "\n";
+    std::cout << instance_name_ << "\n";
 
-    std::cout<< INDENT << "Starting date: ";
+    std::cout << INDENT << "Starting date: ";
     start_date_.print();
-    std::cout<<"\n";
+    std::cout <<"\n";
 
-    std::cout<< INDENT << "Amount of students: "
-            << signups_.size() << "\n";
+    std::cout << INDENT << "Amount of students: "
+              << signups_.size() << "\n";
 }
 
 void Instance::print_students() const
@@ -70,7 +70,7 @@ void Instance::complete_student(Account* student)
 void Instance::print_course_info() const
 {
     course_of_->print_info(false);
-    std::cout<< " " << instance_name_ << "\n";
+    std::cout << " " << instance_name_ << "\n";
 }
 
 Course* Instance::get_course_ptr() const
