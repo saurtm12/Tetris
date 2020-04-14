@@ -107,20 +107,20 @@ void University::add_staff_to_course(Params params)
 
 void University::add_instance(Params params)
 {
-    if ( courses_.find(params.at(0)) == courses_.end() )
+    auto iter = courses_.find(params.at(0));
+    if ( iter == courses_.end() )
     {
         std::cout << CANT_FIND << params.at(0) << "\n";
         return;
     }
 
-    if ( courses_.at(params.at(0))->has_instance(params.at(1)) )
+    if ( iter->second->has_instance(params.at(1)) )
     {
         std::cout << INSTANCE_EXISTS << "\n";
         return;
     }
-    Course* course = courses_.at(params.at(0));
-    Instance* new_instance = new Instance(course, params.at(1), utils::today );
-    courses_.at(params.at(0))->new_instance(new_instance);
+    Instance* new_instance = new Instance(iter->second, params.at(1), utils::today );
+    iter->second->new_instance(new_instance);
 }
 
 void University::sign_up_on_course(Params params)
