@@ -114,46 +114,72 @@ void University::add_instance(Params params)
 
 void University::sign_up_on_course(Params params)
 {
-    if ( courses_.find(params.at(0)) == courses_.end() )
+    auto iter = courses_.find(params.at(0));
+    if ( iter == courses_.end() )
     {
         std::cout << CANT_FIND << params.at(0) << "\n";
         return;
     }
 
     Instance* sign_up_instance = nullptr;
-    sign_up_instance = courses_.at(params.at(0))->get_instance(params.at(1));
+    sign_up_instance = iter->second->get_instance(params.at(1));
 
     if ( sign_up_instance == nullptr )
     {
         std::cout << CANT_FIND << params.at(1) << "\n";
         return;
     }
-
-    if ( accounts_.find(std::stoi(params.at(2))) == accounts_.end() )
+    auto account_iter =  accounts_.find(std::stoi(params.at(2)));
+    if ( account_iter == accounts_.end() )
     {
         std::cout << CANT_FIND << params.at(2) << "\n";
         return;
     }
 
-    if ( sign_up_instance->add_student(accounts_.at(std::stoi(params.at(2)))) )
+    if ( sign_up_instance->add_student(account_iter->second) )
     {
-        accounts_.at(std::stoi(params.at(2)))->add_instance(sign_up_instance);
+        account_iter->second->add_instance(sign_up_instance);
     }
 }
 
 void University::complete_course(Params params)
 {
+    auto iter = courses_.find(params.at(0));
+    if ( iter  == courses_.end() )
+    {
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
 
+    Instance* complete_instance = nullptr;
+    complete_instance = iter->second->get_instance(params.at(1));
+
+    if ( complete_instance == nullptr )
+    {
+        std::cout << CANT_FIND << params.at(1) << "\n";
+        return;
+    }
+    auto account_iter = accounts_.find(std::stoi(params.at(2)));
+    if ( account_iter  == accounts_.end() )
+    {
+        std::cout << CANT_FIND << params.at(2) << "\n";
+        return;
+    }
+
+    if ( account_iter->second->complete_instance(complete_instance) )
+    {
+        complete_instance->complete_student(account_iter->second);
+    }
 }
 
 void University::print_signups(Params params)
 {
-
+    
 }
 
 void University::print_study_state(Params params)
 {
-
+    
 }
 
 void University::print_completed(Params params)
