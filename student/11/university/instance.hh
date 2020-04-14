@@ -28,9 +28,9 @@ const std::string INDENT = "    ";
 class Instance
 {
 public:
-    Instance(Course* course_, std::string instance_name_, Date start_date_ = utils::today);
+    Instance(Course* course_, std::string instance_name_, Date start_date_ );
     ~Instance();
-
+    
     /**
      * @brief print instance's info.
      */
