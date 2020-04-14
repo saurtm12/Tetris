@@ -8,6 +8,7 @@ Course : TIE-02201
       -print_study_state()
       -add_instance(Instance* instance)
       -complete_instance(Instance* instance)
+      -Account destructor
 */
 #include "account.hh"
 #include "utils.hh"
@@ -26,6 +27,10 @@ Account::Account(std::string full_name, std::string email, int account_number):
     first_name_ = name.front();
 }
 
+Account::~Account()
+{
+    
+}
 
 void Account::print() const
 {

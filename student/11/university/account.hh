@@ -8,6 +8,8 @@
       -print_study_state()
       -add_instance(Instance* instance)
       -complete_instance(Instance* instance)
+      -Account destructor
+      -disable assign operator and copy constructor
     *Add a private variable : credit_ to store the total credits have been earned
   * ----------
   * Defines a student or a staff account in the university system.
@@ -41,7 +43,15 @@ public:
      * @param account_number
      */
     Account(std::string full_name, std::string email, int account_number);
-
+    
+    /**
+     * @brief Account destructor
+     */
+    ~Account();
+    
+    //disable operator= and copy constructor
+    Account(const Account& initial_value) = delete;
+    Account& operator=(const Account& assignable_value) = delete;
     /**
      * @brief print account info on one line
      */
