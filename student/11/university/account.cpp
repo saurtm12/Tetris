@@ -45,7 +45,7 @@ void Account::print_complete_courses() const
     for ( Course* course : completed_ ){
         course->print_info(true);
     }
-    std::cout << "Total credits: " << credit_ << std::endl;
+    std::cout << "Total credits: " << credit_ << "\n";
 }
 
 void Account::print_study_state() const
@@ -55,14 +55,14 @@ void Account::print_study_state() const
     {
         instance->print_course_info();
     }
-    std::cout << "Completed:" << std::endl;
+    std::cout << "Completed:" << "\n";
     print_complete_courses();
 }
 
 void Account::add_instance(Instance* new_instance)
 {
     current_.push_back(new_instance);
-    std::cout << SIGNED_UP << std::endl;
+    std::cout << SIGNED_UP << "\n";
 }
 
 bool Account::complete_instance(Instance* instance)
@@ -70,11 +70,11 @@ bool Account::complete_instance(Instance* instance)
     auto iter =  std::find(current_.begin(), current_.end(), instance);
     if (iter == current_.end())
     {
-        std::cout << NO_SIGNUPS << std::endl;
+        std::cout << NO_SIGNUPS << "\n";
         return false;
     }
     credit_ += instance->get_course_ptr()->get_credits();
-    std::cout << COMPLETED << std::endl;
+    std::cout << COMPLETED << "\n";
     completed_.push_back(instance->get_course_ptr());
     current_.erase(iter);
     return true;

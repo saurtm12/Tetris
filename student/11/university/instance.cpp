@@ -22,7 +22,7 @@ void Instance::print() const
     std::cout<<"\n";
 
     std::cout<< INDENT << "Amount of students: "
-            << signups_.size() << std::endl;
+            << signups_.size() << "\n";
 }
 
 void Instance::print_students() const
@@ -46,7 +46,7 @@ bool Instance::add_student(Account* new_student)
     }
     if (start_date_ < utils::today )
     {
-        std::cout << LATE << std::endl;
+        std::cout << LATE << "\n";
         return false;
     }
 
