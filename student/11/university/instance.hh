@@ -56,6 +56,8 @@ public:
      * @brief add a student to an instance.
      * @return true if add student successfully,
      *  if the student is current in the instance, return false.
+     * @param new_student : add this student to instance
+     * @param sign_up_date : the date that this sign up occur
      */
     bool add_student(Account* new_student, const Date& sign_up_date);
 
@@ -69,6 +71,10 @@ public:
      */
     void print_course_info() const;
 
+    /**
+     * @brief return the pointer of the course that intance belong
+     * @return course pointer of the instance
+     */
     Course* get_course_ptr() const;
 private:
     Course* course_of_;
