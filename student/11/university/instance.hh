@@ -69,7 +69,7 @@ private:
     Course* course_of_;
     std::string instance_name_;
     std::vector<Account*> signups_;
-    Date start_date_;
+    const Date start_date_;
 };
 
 #endif // INSTANCE_HH
