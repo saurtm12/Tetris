@@ -95,12 +95,50 @@ void University::add_staff_to_course(Params params)
 
 void University::add_instance(Params params)
 {
+    if ( courses_.find(params.at(0)) == courses_.end() )
+    {
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
 
+    if ( courses_.at(params.at(0))->has_instance(params.at(1)) )
+    {
+        std::cout << INSTANCE_EXISTS << "\n";
+        return;
+    }
+
+    Course* course = courses_.at(params.at(0));
+    Instance* new_instance = new Instance(course, params.at(1), utils::today );
+    courses_.at(params.at(0))->new_instance(new_instance);
 }
 
 void University::sign_up_on_course(Params params)
 {
+    if ( courses_.find(params.at(0)) == courses_.end() )
+    {
+        std::cout << CANT_FIND << params.at(0) << "\n";
+        return;
+    }
 
+    Instance* sign_up_inst = nullptr;
+    sign_up_inst = courses_.at(params.at(0))->get_instance(params.at(1));
+
+    if ( sign_up_inst == nullptr )
+    {
+        std::cout << CANT_FIND << params.at(1) << "\n";
+        return;
+    }
+
+    if ( accounts_.find(std::stoi(params.at(2))) == accounts_.end() )
+    {
+        std::cout << CANT_FIND << params.at(2) << "\n";
+        return;
+    }
+
+    if ( sign_up_inst->add_student(accounts_.at(std::stoi(params.at(2)))) )
+    {
+        accounts_.at(std::stoi(params.at(2)))->add_instance(sign_up_inst);
+    }
 }
 
 void University::complete_course(Params params)
