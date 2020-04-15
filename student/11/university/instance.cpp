@@ -21,14 +21,14 @@ Instance::~Instance()
 
 void Instance::print() const
 {
-    std::cout << instance_name_ << "\n";
+    std::cout << instance_name_ << std::endl;
 
     std::cout << INDENT << "Starting date: ";
     start_date_.print();
-    std::cout <<"\n";
+    std::cout <<std::endl;
 
     std::cout << INDENT << "Amount of students: "
-              << signups_.size() << "\n";
+              << signups_.size() << std::endl;
 }
 
 void Instance::print_students() const
@@ -48,12 +48,12 @@ bool Instance::add_student(Account* new_student,const Date& sign_up_date)
     auto iter = std::find(signups_.begin(), signups_.end(), new_student);
     if ( iter != signups_.end())
     {   
-        std::cout << ALREADY_REGISTERED << "\n";
+        std::cout << ALREADY_REGISTERED << std::endl;
         return false;
     }
     if ( start_date_ < sign_up_date )
     {
-        std::cout << LATE << "\n";
+        std::cout << LATE << std::endl;
         return false;
     }
 
@@ -70,7 +70,7 @@ void Instance::complete_student(Account* student)
 void Instance::print_course_info() const
 {
     course_of_->print_info(false);
-    std::cout << " " << instance_name_ << "\n";
+    std::cout << " " << instance_name_ << std::endl;
 }
 
 Course* Instance::get_course_ptr() const

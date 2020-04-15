@@ -110,13 +110,13 @@ void University::add_instance(Params params)
     auto iter = courses_.find(params.at(0));
     if ( iter == courses_.end() )
     {
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
 
     if ( iter->second->has_instance(params.at(1)) )
     {
-        std::cout << INSTANCE_EXISTS << "\n";
+        std::cout << INSTANCE_EXISTS << std::endl;
         return;
     }
     Instance* new_instance = new Instance(iter->second, params.at(1), utils::today );
@@ -128,7 +128,7 @@ void University::sign_up_on_course(Params params)
     auto iter = courses_.find(params.at(0));
     if ( iter == courses_.end() )
     {
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
 
@@ -137,13 +137,13 @@ void University::sign_up_on_course(Params params)
 
     if ( sign_up_instance == nullptr )
     {
-        std::cout << CANT_FIND << params.at(1) << "\n";
+        std::cout << CANT_FIND << params.at(1) << std::endl;
         return;
     }
     auto account_iter =  accounts_.find(std::stoi(params.at(2)));
     if ( account_iter == accounts_.end() )
     {
-        std::cout << CANT_FIND << params.at(2) << "\n";
+        std::cout << CANT_FIND << params.at(2) << std::endl;
         return;
     }
 
@@ -158,7 +158,7 @@ void University::complete_course(Params params)
     auto iter = courses_.find(params.at(0));
     if ( iter  == courses_.end() )
     {
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
 
@@ -167,13 +167,13 @@ void University::complete_course(Params params)
 
     if ( complete_instance == nullptr )
     {
-        std::cout << CANT_FIND << params.at(1) << "\n";
+        std::cout << CANT_FIND << params.at(1) << std::endl;
         return;
     }
     auto account_iter = accounts_.find(std::stoi(params.at(2)));
     if ( account_iter  == accounts_.end() )
     {
-        std::cout << CANT_FIND << params.at(2) << "\n";
+        std::cout << CANT_FIND << params.at(2) << std::endl;
         return;
     }
 
@@ -187,7 +187,7 @@ void University::print_signups(Params params)
 {
     auto iter = courses_.find(params.at(0));
     if ( iter  == courses_.end() ){
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
     iter->second->print_signups();
@@ -198,7 +198,7 @@ void University::print_study_state(Params params)
     auto iter = accounts_.find(std::stoi(params.at(0)));
     if ( iter == accounts_.end() )
     {
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
     iter->second->print_study_state();
@@ -209,7 +209,7 @@ void University::print_completed(Params params)
     auto iter = accounts_.find(std::stoi(params.at(0)));
     if ( iter == accounts_.end() )
     {
-        std::cout << CANT_FIND << params.at(0) << "\n";
+        std::cout << CANT_FIND << params.at(0) << std::endl;
         return;
     }
     iter->second->print_complete_courses();
