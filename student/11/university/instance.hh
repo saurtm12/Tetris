@@ -86,6 +86,7 @@ private:
     Course* course_of_;
     std::string instance_name_;
     std::vector<Account*> signups_;
+    std::vector<Account*> pass_;
     const Date start_date_;
 };
 

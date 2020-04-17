@@ -45,7 +45,14 @@ bool Instance::is_named(const std::string& name) const
 
 bool Instance::add_student(Account* new_student,const Date& sign_up_date)
 {
-    auto iter = std::find(signups_.begin(), signups_.end(), new_student);
+    auto iter = std::find(pass_.begin(), pass_.end(), new_student);
+    if ( iter != pass_.end())
+    {   
+        std::cout << ALREADY_REGISTERED << std::endl;
+        return false;
+    }
+
+    iter = std::find(signups_.begin(), signups_.end(), new_student);
     if ( iter != signups_.end())
     {   
         std::cout << ALREADY_REGISTERED << std::endl;
@@ -63,6 +70,7 @@ bool Instance::add_student(Account* new_student,const Date& sign_up_date)
 
 void Instance::complete_student(Account* student)
 {
+    pass_.push_back(student);
     auto iter = std::find(signups_.begin(), signups_.end(), student);
     signups_.erase(iter);
 }
