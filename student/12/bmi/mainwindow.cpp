@@ -40,7 +40,7 @@ void MainWindow::pushCount()
         QString LOW_(LOW.c_str());
         ui->infoTextBrowser->setText(LOW_);
     }
-    if (bmi > 25)
+    if (bmi >= 25)
     {
         QString HIGH_(HIGH.c_str());
         ui->infoTextBrowser->setText(HIGH_);
