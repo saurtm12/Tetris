@@ -23,10 +23,17 @@ public:
 
 private slots:
     // Add your slots here
-
+    void click_close_button();
+    void click_start_button();
+    void click_stop_button();
+    void click_reset_button();
+    void finish_1000ms();
 private:
     Ui::MainWindow *ui;
     // Add other necessary members here
+    int remain =1000 ;
+    int minute ;
+    int second ;
 };
 
 #endif // MAINWINDOW_HH
