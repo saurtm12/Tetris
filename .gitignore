@@ -6,3 +6,4 @@ examples/*
 *.o
 *.exe
 *.json
+.autosave
