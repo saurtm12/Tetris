@@ -1,14 +1,5 @@
 #include "timer.hh"
-
-Timer::Timer()
-{
-
-}
-
-Timer::~Timer()
-{
-
-}
+#include <timer.hh>
 
 void Timer::reset_time()
 {
