@@ -6,6 +6,10 @@ class Timer : public QTimer
 {
     Q_OBJECT
 public:
+    Timer():QTimer(){};
+    ~Timer(){};
+    Timer(const Timer& initial_value) = delete;
+    Timer& operator=(const Timer& assignable_value) = delete;
     int get_minute();
     int get_second();
 public slots :
