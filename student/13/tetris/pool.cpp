@@ -35,6 +35,7 @@ Pool::Pool(QObject *parent, QGraphicsScene* board_):
     blackpen.setWidth(1);
     whitepen = QPen(Qt::white);
     whitepen.setWidth(1);
+
     // Setting random engine ready for the first real call.
     int seed = time(0);
     randomEng.seed(seed);
@@ -274,7 +275,7 @@ void Pool::rotate()
                 , origin.second + (origin.first - temp_pos.at(i).first)};
     }
 
-
+    //make sure the piece is in the matrix
     for (auto& point : temp_pos)
     {
         while (point.first < 0)
@@ -353,6 +354,7 @@ bool Pool::game_is_start() const
 {
     return is_start;
 }
+
 bool Pool::game_is_pause() const
 {
     return is_paused;

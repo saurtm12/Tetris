@@ -67,7 +67,7 @@ private:
     };
     std::string GAME_OVER = "Game over! Your score : ";
     const int SECOND_PER_MINUTE = 60;
-    Pool* pool;
+    Pool* pool = nullptr;
 
     /**
      * @brief set up a new game.

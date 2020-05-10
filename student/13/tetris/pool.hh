@@ -199,6 +199,7 @@ signals :
      * @param score : give score to notice user
      */
     void game_over(int score);
+
 private :
     const int INI_FALL_VELOCITY = 500;
     using Matrix = std::vector<std::vector<int>>;
@@ -210,7 +211,7 @@ private :
     QGraphicsScene* board;
 
     //used in counting time that the player has played.
-    QTimer* timer;
+    QTimer* timer = nullptr;
     int second = 0;
 
     //time period that tell a tetrominos should be dropped
