@@ -1,0 +1,47 @@
+The game is implement with 2 Classes : 
+- Pool
+- Tetromino
+In user interface, there are 4 buttons :
+- Start
+- Pause
+- Resume
+- Quit
+, 3 LcdNumber :
+- Score : earned score
+- min : min have passed
+- sec : secs have passed in this minute.
+
+How to play:
+The game is implement for using arrow keys : up, right, down, left, but magically they dont work.
+But the alternative keys : W D S A work well.
+W : rotates tetromino.
+S : makes tetromino fall faster.
+A : Move to the left 1 unit.
+D : Move to the right 1 unit.
+The game is over once there can not create new tetrominos, i.e, the grid is full at the middle.
+Score : + 12(number of columns) points when the user finish 1 row.
+
+Once the user press start, the game start immediately, the game can be pause 
+anytime, and resume any time after pausing.
+The score is displayed immediately when the player completes rows.
+Feature have been implemented :
+Compulsory :
+	- At start the game area is empty and it simply look like a square.
+	- The game has 7 different kind of tetromino.
+	- The game has game area, where tetrominos fall directly downwards,
+tetrominos can fall automatically one after the other.
+	- The user is able to move falling tetrominos horizontally to the left and right. 
+	- A tetromino stops if it hits the bottom of the game area or an earlier fallen tetromino.
+	- When the game is over, the user is informed about it.
+	- The game has been documented the functionality of the game.
+Extra :
+	- All seven different tetrominos have been implemented. (5 p.)
+	- A falling tetromino can be turned. (15 p.)
+	- A fallen or stopped tetromino can be moved horizontally. (10 p.)
+	- Full horizontal rows are removed. (10 p.)
+	- The time used in the game is counted (The time used so far is shown during the game. (10 p.))
+	- The game counts points. (5 p.)
+	- Tetrominos fall quicker when the game advances. (5 p.)
+	- After the game ends (or anyway), it is possible to start the game again from the beginning without starting the program again. (5 p.)
+	- The falling tetromino can be moved simultaneously as down as possible (with button W). (5 p.)
+
