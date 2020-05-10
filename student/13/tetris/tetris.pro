@@ -25,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
-
+        mainwindow.cpp\
+        pool.cpp \
+        tetromino.cpp
 HEADERS += \
-        mainwindow.hh
-
+        mainwindow.hh \
+        pool.hh \
+        tetromino.hh
 FORMS += \
         mainwindow.ui
 
