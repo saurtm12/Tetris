@@ -121,7 +121,8 @@ void Pool::draw_block(const int& x, const int& y, const int& color)
     {
         return;
     }
-    QGraphicsRectItem* block = new QGraphicsRectItem(x*SQUARE_SIDE,BORDER_DOWN- (y+1)*SQUARE_SIDE,
+    QGraphicsRectItem* block = new QGraphicsRectItem(
+                x*SQUARE_SIDE,BORDER_DOWN- (y+1)*SQUARE_SIDE,
                           SQUARE_SIDE, SQUARE_SIDE);
 
     block->setBrush(colors.at(color));
@@ -154,7 +155,8 @@ bool Pool::piece_is_landed() const
         {
             return true;
         }
-        if ( !point_is_piece(point.first,point.second-1) && matrix.at(point.first).at(point.second-1) != Color::WHITE)
+        if ( !point_is_piece(point.first,point.second-1)
+             && matrix.at(point.first).at(point.second-1) != Color::WHITE)
         {
             return true;
         }
@@ -268,7 +270,8 @@ void Pool::rotate()
     auto origin = current_pos.at(0);
     for (unsigned int i = 1; i < current_pos.size(); i++)
     {
-        temp_pos.at(i) = {origin.first+ (temp_pos.at(i).second-origin.second), origin.second + (origin.first - temp_pos.at(i).first)};
+        temp_pos.at(i) = {origin.first+ (temp_pos.at(i).second-origin.second)
+                , origin.second + (origin.first - temp_pos.at(i).first)};
     }
 
 

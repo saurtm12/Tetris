@@ -10,7 +10,8 @@
  * */
 #include "tetromino.hh"
 
-Tetromino::Tetromino(const int& tetromino_kind_, const int& color_, Positions initial_pos_):
+Tetromino::Tetromino(const int& tetromino_kind_, const int& color_
+                     , Positions initial_pos_):
     tetromino_kind(tetromino_kind_),
     initial_pos(initial_pos_),
     color(color_)

@@ -18,10 +18,11 @@ using Positions = std::vector<std::pair<int,int>>;
 class Tetromino
 {
 public:
-    Tetromino(const int& tetromino_kind_, const int& color_, Positions initial_pos_);
+    Tetromino(const int& tetromino_kind_, const int& color_
+              , Positions initial_pos_);
     Tetromino();
     ~Tetromino();
-    //can not disable copy constructor and assign operator because I am using it.
+    //cannot disable copy constructor and assign operator because I am using it
 
     /**
      * @brief return the kind of tetromino.

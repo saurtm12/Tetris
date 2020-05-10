@@ -43,13 +43,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Add more initial settings and connect calls, when needed.
     pool = new Pool(this, scene_);
-    connect(pool, &Pool::score_change, ui->scoreLcdNumber, QOverload<int>::of(&QLCDNumber::display));
-    connect(ui->startPushButton, &QPushButton::clicked, pool, &Pool::start_game);
-    connect(ui->pausePushButton, &QPushButton::clicked, pool, &Pool::pause_game);
-    connect(ui->resumePushButton, &QPushButton::clicked, pool, &Pool::resume_game);
-    connect(ui->quitPushButton, &QPushButton::clicked, this, &MainWindow::close);
-    connect(pool, &Pool::time_change, this, &MainWindow::display_time);
-    connect(pool, QOverload<int>::of(&Pool::game_over),this, QOverload<int>::of(&MainWindow::display_game_over));
+    connect(pool, &Pool::score_change,
+            ui->scoreLcdNumber, QOverload<int>::of(&QLCDNumber::display));
+    connect(ui->startPushButton, &QPushButton::clicked,
+            pool, &Pool::start_game);
+    connect(ui->pausePushButton, &QPushButton::clicked,
+            pool, &Pool::pause_game);
+    connect(ui->resumePushButton, &QPushButton::clicked,
+            pool, &Pool::resume_game);
+    connect(ui->quitPushButton, &QPushButton::clicked,
+            this, &MainWindow::close);
+    connect(pool, &Pool::time_change,
+            this, &MainWindow::display_time);
+    connect(pool, QOverload<int>::of(&Pool::game_over),
+            this, QOverload<int>::of(&MainWindow::display_game_over));
 }
 
 MainWindow::~MainWindow()
@@ -97,13 +104,20 @@ void MainWindow::new_game()
     delete pool;
     scene_->clear();
     pool = new Pool(this, scene_);
-    connect(pool, &Pool::score_change, ui->scoreLcdNumber, QOverload<int>::of(&QLCDNumber::display));
-    connect(ui->startPushButton, &QPushButton::clicked, pool, &Pool::start_game);
-    connect(ui->pausePushButton, &QPushButton::clicked, pool, &Pool::pause_game);
-    connect(ui->resumePushButton, &QPushButton::clicked, pool, &Pool::resume_game);
-    connect(ui->quitPushButton, &QPushButton::clicked, this, &MainWindow::close);
-    connect(pool, &Pool::time_change, this, &MainWindow::display_time);
-    connect(pool, QOverload<int>::of(&Pool::game_over),this, QOverload<int>::of(&MainWindow::display_game_over));
+    connect(pool, &Pool::score_change, ui->scoreLcdNumber
+            , QOverload<int>::of(&QLCDNumber::display));
+    connect(ui->startPushButton, &QPushButton::clicked,
+            pool, &Pool::start_game);
+    connect(ui->pausePushButton, &QPushButton::clicked,
+            pool, &Pool::pause_game);
+    connect(ui->resumePushButton, &QPushButton::clicked,
+            pool, &Pool::resume_game);
+    connect(ui->quitPushButton, &QPushButton::clicked,
+            this, &MainWindow::close);
+    connect(pool, &Pool::time_change,
+            this, &MainWindow::display_time);
+    connect(pool, QOverload<int>::of(&Pool::game_over),
+            this, QOverload<int>::of(&MainWindow::display_game_over));
     ui->secLcdNumber->display(0);
     ui->minLcdNumber->display(0);
     ui->scoreLcdNumber->display(0);
