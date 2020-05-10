@@ -76,11 +76,13 @@ private:
 public slots:
     /**
      * @brief display time
+     * @param second : to display mins and secs.
      */
     void display_time(int second);
 
     /**
      * @brief inform user that game is over and his score.
+     * @param score : current score.
      */
     void display_game_over(int score);
 protected:

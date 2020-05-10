@@ -184,16 +184,19 @@ public slots :
 signals :
     /**
      * @brief emit a signal that tell the mainwindow display the new time.
+     * @param second : the second that user have used.
      */
     void time_change(int second);
 
     /**
      * @brief emit a signal that tell the mainwindow display the new score.
+     * @param score : give score to notice user
      */
     void score_change(int score);
 
     /**
      * @brief emit a signal that tell the mainwindow display the game is over.
+     * @param score : give score to notice user
      */
     void game_over(int score);
 private :
@@ -250,6 +253,9 @@ private :
 
     /**
      * @brief draw a block in the geometry coordinate
+     * @param x : x-coord
+     * @param y : y-coord
+     * @param color : color should be use
      */
     void draw_block(const int& x,const  int& y,const int& color);
 
