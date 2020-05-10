@@ -1,7 +1,6 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -31,15 +30,16 @@ MainWindow::MainWindow(QWidget *parent) :
     // if its upper left corner is inside the sceneRect.
     scene_->setSceneRect(0, 0, BORDER_RIGHT - 1, BORDER_DOWN - 1);
 
-    // Setting random engine ready for the first real call.
-    int seed = time(0); // You can change seed value for testing purposes
-    randomEng.seed(seed);
-    distr = std::uniform_int_distribution<int>(0, NUMBER_OF_TETROMINOS - 1);
-    distr(randomEng); // Wiping out the first random number (which is almost always 0)
-    // After the above settings, you can use randomEng to draw the next falling
-    // tetromino by calling: distr(randomEng) in a suitable method.
 
     // Add more initial settings and connect calls, when needed.
+    pool = new Pool(this, scene_);
+    connect(pool, &Pool::score_change, ui->scoreLcdNumber, QOverload<int>::of(&QLCDNumber::display));
+    connect(ui->startPushButton, &QPushButton::clicked, pool, &Pool::start_game);
+    connect(ui->pausePushButton, &QPushButton::clicked, pool, &Pool::pause_game);
+    connect(ui->resumePushButton, &QPushButton::clicked, pool, &Pool::resume_game);
+    connect(ui->quitPushButton, &QPushButton::clicked, this, &MainWindow::close);
+    connect(pool, &Pool::time_change, this, &MainWindow::display_time);
+    connect(pool, QOverload<int>::of(&Pool::game_over),this, QOverload<int>::of(&MainWindow::display_game_over));
 }
 
 MainWindow::~MainWindow()
@@ -47,3 +47,54 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::display_time(int second)
+{
+    ui->secLcdNumber->display(second % SECOND_PER_MINUTE);
+    ui->minLcdNumber->display(second / SECOND_PER_MINUTE);
+}
+
+void MainWindow::display_game_over(int score)
+{
+    auto score_ = std::to_string(score);
+    std::string info = GAME_OVER;
+    for (unsigned int i = 0; i< score_.size(); i++)
+    {
+        info.push_back(score_[i]);
+    }
+    QString result(info.c_str());
+    QMessageBox::information(this,tr("Message"), result );
+    new_game();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+    if (!pool->game_is_start() || pool->game_is_pause())
+    {
+        return;
+    }
+    for (auto key : KEY_FUNC)
+    {
+        if (event->key() == key.key_press)
+        {
+            (pool->*key.func)();
+            return;
+        }
+    }
+}
+
+void MainWindow::new_game()
+{
+    delete pool;
+    scene_->clear();
+    pool = new Pool(this, scene_);
+    connect(pool, &Pool::score_change, ui->scoreLcdNumber, QOverload<int>::of(&QLCDNumber::display));
+    connect(ui->startPushButton, &QPushButton::clicked, pool, &Pool::start_game);
+    connect(ui->pausePushButton, &QPushButton::clicked, pool, &Pool::pause_game);
+    connect(ui->resumePushButton, &QPushButton::clicked, pool, &Pool::resume_game);
+    connect(ui->quitPushButton, &QPushButton::clicked, this, &MainWindow::close);
+    connect(pool, &Pool::time_change, this, &MainWindow::display_time);
+    connect(pool, QOverload<int>::of(&Pool::game_over),this, QOverload<int>::of(&MainWindow::display_game_over));
+    ui->secLcdNumber->display(0);
+    ui->minLcdNumber->display(0);
+    ui->scoreLcdNumber->display(0);
+}

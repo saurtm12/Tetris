@@ -1,10 +1,14 @@
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
+#include <pool.hh>
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include <random>
-
+#include <QKeyEvent>
+#include <QMessageBox>
+#include <QString>
+#include <string>
+#include <algorithm>
 namespace Ui {
 class MainWindow;
 }
@@ -16,7 +20,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
 private:
     Ui::MainWindow *ui;
 
@@ -36,30 +39,47 @@ private:
     // Number of vertical cells (places for tetromino components)
     const int ROWS = BORDER_DOWN / SQUARE_SIDE;
 
-    // Constants for different tetrominos and the number of them
-    enum Tetromino_kind {HORIZONTAL,
-                         LEFT_CORNER,
-                         RIGHT_CORNER,
-                         SQUARE,
-                         STEP_UP_RIGHT,
-                         PYRAMID,
-                         STEP_UP_LEFT,
-                         NUMBER_OF_TETROMINOS};
-    // From the enum values above, only the last one is needed in this template.
-    // Recall from enum type that the value of the first enumerated value is 0,
-    // the second is 1, and so on.
-    // Therefore the value of the last one is 7 at the moment.
-    // Remove those tetromino kinds above that you do not implement,
-    // whereupon the value of NUMBER_OF_TETROMINOS changes, too.
-    // You can also remove all the other values, if you do not need them,
-    // but most probably you need a constant value for NUMBER_OF_TETROMINOS.
+    struct move_command
+    {
+        int key_press;
+        void (Pool::*func)();
+    };
+    const std::vector<move_command> KEY_FUNC =
+    {
+        {Qt::Key_Left, &Pool::move_left},
+        {Qt::Key_Right, &Pool::move_right},
+        {Qt::Key_Up, &Pool::rotate},
+        {Qt::Key_Down, &Pool::move_down},
+        {Qt::Key_A, &Pool::move_left},
+        {Qt::Key_D, &Pool::move_right},
+        {Qt::Key_W, &Pool::rotate},
+        {Qt::Key_S, &Pool::move_down}
+    };
+    std::string GAME_OVER = "Game over! Your score : ";
+    const int SECOND_PER_MINUTE = 60;
+    Pool* pool;
 
+    /**
+     * @brief set up a new game.
+     */
+    void new_game();
+public slots:
+    /**
+     * @brief display time
+     */
+    void display_time(int second);
 
-    // For randomly selecting the next dropping tetromino
-    std::default_random_engine randomEng;
-    std::uniform_int_distribution<int> distr;
+    /**
+     * @brief inform user that game is over and his score.
+     */
+    void display_game_over(int score);
+protected:
 
-    // More constants, attibutes, and methods
+    /**
+     * @brief handle the key that pressed by user.
+     */
+    void keyPressEvent(QKeyEvent* event) override;
+
 };
 
 #endif // MAINWINDOW_HH
