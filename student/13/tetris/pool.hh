@@ -111,6 +111,169 @@ class Pool : public QObject
 public :
     Pool(QObject *parent, QGraphicsScene* board_);
     ~Pool();
+    Pool(const Pool& initial_value) = delete;
+    Pool& operator=(const Pool& assignable_value) = delete;
+    /**
+     * @brief if the game is started.
+     * @return true if the game is started, other wise false.
+     */
+    bool game_is_start() const;
+
+    /**
+     * @brief if the game is paused.
+     * @return true if the game is paused, other wise false.
+     */
+    bool game_is_pause() const;
+
+public slots :
+    /**
+     * @brief start the game.
+     */
+    void start_game();
+
+    /**
+     * @brief pause the game.
+     */
+    void pause_game();
+
+    /**
+     * @brief resume the game.
+     */
+    void resume_game();
+
+    /**
+     * @brief finish a second.
+     */
+    void finish_second();
+
+    /**
+     * @brief a time period that it is necessary to drop the tetromino down.
+     */
+    void tick();
+
+    /**
+     * @brief try move the tetromino down.
+     */
+    void move_down();
+
+    /**
+     * @brief try move the tetromino right.
+     */
+    void move_right();
+
+    /**
+     * @brief try move the tetromino left.
+     */
+    void move_left();
+
+    /**
+     * @brief try move the tetromino down.
+     */
+    void rotate();
+
+signals :
+    /**
+     * @brief emit a signal that tell the mainwindow display the new time.
+     */
+    void time_change(int second);
+
+    /**
+     * @brief emit a signal that tell the mainwindow display the new score.
+     */
+    void score_change(int score);
+
+    /**
+     * @brief emit a signal that tell the mainwindow display the game is over.
+     */
+    void game_over(int score);
+private :
+    const int INI_FALL_VELOCITY = 500;
+    using Matrix = std::vector<std::vector<int>>;
+    // For randomly selecting the next dropping tetromino
+    std::default_random_engine randomEng;
+    std::uniform_int_distribution<int> distr;
+
+    //store the pointer that we can represent matrix on the board.
+    QGraphicsScene* board;
+
+    //used in counting time that the player has played.
+    QTimer* timer;
+    int second = 0;
+
+    //time period that tell a tetrominos should be dropped
+    QTimer* ticktok;
+    int fall_velocity = INI_FALL_VELOCITY;
+
+    //use for drawing blocks
+    QPen blackpen;
+    QPen whitepen;
+
+    // The main matrix that we use.
+    // the matrix have the axes that is similar to math axis
+    // ( Ox is to the east and Oy is to the north;
+    Matrix matrix;
+
+    // maps that contain types of tetrominos and QBrush that would be used.
+    std::unordered_map<int, Tetromino> tetrominos;
+    std::unordered_map<int, QBrush> colors;
+
+    //initialize score and other attributes.
+    int score = 0;
+    bool is_start = false;
+    bool is_paused = false;
+    int board_height =0;
+    int board_width = 0;
+
+    //info of current tetrominos and positions
+    Tetromino current_piece;
+    Positions current_pos;
+
+    /**
+     * @brief initialize tetrominos map
+     */
+    void initialize_tetrominos();
+
+    /**
+     * @brief initialize color map
+     */
+    void initialize_colors();
+
+    /**
+     * @brief draw a block in the geometry coordinate
+     */
+    void draw_block(const int& x,const  int& y,const int& color);
+
+    /**
+     * @brief refresh board everytime makes a change.
+     */
+    void refresh_board();
+
+    /**
+     * @brief check if the tetromino should be put to the matrix.
+     * @return true if it should be, otherwise false.
+     */
+    bool piece_is_landed() const;
+
+    /**
+     * @brief give the current tetromino to the matrix by it current pos.
+     */
+    void show_piece();
+
+    /**
+     * @brief check if the considering point belongs to the current piece
+     * @return true if it is, false otherwise.
+     */
+    bool point_is_piece(int x, int y) const;
+
+    /**
+     * @brief give the new piece for game.
+     */
+    void give_new_piece();
+
+    /**
+     * @brief check if rows are full, then give score.
+     */
+    void eliminate_rows();
 };
 
 #endif // POOL_HH
