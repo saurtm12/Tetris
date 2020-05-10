@@ -308,7 +308,10 @@ void Pool::rotate()
                     temp_point.second++;
                 }
             }
-            give_new_piece();
+            if (piece_is_landed())
+            {
+                give_new_piece();
+            }
         }
     }
 
@@ -334,6 +337,7 @@ void Pool::rotate()
 
     refresh_board();
 }
+
 void Pool::give_new_piece()
 {
     current_piece = tetrominos.at(distr(randomEng));
