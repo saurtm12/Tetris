@@ -1,3 +1,13 @@
+/* Class: Mainwindow
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+ * ----------
+ * TIE-02201/TIE-02207 SPRING 2020
+ * ----------
+ * Class represents the mainwindow of the game.
+ *
+ * */
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 

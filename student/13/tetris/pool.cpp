@@ -1,4 +1,14 @@
-﻿#include "pool.hh"
+﻿/* Class: Pool
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+ * ----------
+ * TIE-02201/TIE-02207 SPRING 2020
+ * ----------
+ * Class represents the pool (board) of the game.
+ *
+ * */
+#include "pool.hh"
 Pool::Pool(QObject *parent, QGraphicsScene* board_):
    QObject(parent), board(board_)
 {

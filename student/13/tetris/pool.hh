@@ -1,3 +1,13 @@
+/* Class: Pool
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+ * ----------
+ * TIE-02201/TIE-02207 SPRING 2020
+ * ----------
+ * Class represents the pool (board) of the game.
+ *
+ * */
 #ifndef POOL_HH
 #define POOL_HH
 
