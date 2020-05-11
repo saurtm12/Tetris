@@ -8,7 +8,7 @@
  * Information and instructions for the game.
  *
  * */
-The game is implement with 2 Classes : 
+The game is implemented with 2 Classes : 
 - Pool
 - Tetromino
 In user interface, there are 4 buttons :
@@ -16,23 +16,23 @@ In user interface, there are 4 buttons :
 - Pause
 - Resume
 - Quit
-, 3 LcdNumber :
+, 3 LcdNumbers :
 - Score : earned score
 - min : min have passed
 - sec : secs have passed in this minute.
 
 How to play:
-The game is implement for using arrow keys : up, right, down, left, but magically they dont work.
+The game is implemented for using arrow keys : up, right, down, left, but magically they dont work.
 But the alternative keys : W D S A work well.
 W : rotates tetromino.
 S : makes tetromino fall faster.
-A : Move to the left 1 unit.
-D : Move to the right 1 unit.
+A : Moves to the left 1 unit.
+D : Moves to the right 1 unit.
 The game is over once there can not create new tetrominos, i.e, the grid is full at the middle.
 Score : + 12(number of columns) points when the user finish 1 row.
 
-Once the user press start, the game start immediately, the game can be pause 
-anytime, and resume any time after pausing.
+Once the user presses start, the game starts immediately, the game can be paused
+anytime, and resumed any time after pausing.
 The score is displayed immediately when the player completes rows.
 Feature have been implemented :
 Compulsory :
