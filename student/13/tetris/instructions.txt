@@ -1,3 +1,13 @@
+/* Instruction file.
+    Course : TIE-02201
+    Student's name : Hong Nghia Duc
+    Student No : 292119
+ * ----------
+ * TIE-02201/TIE-02207 SPRING 2020
+ * ----------
+ * Information and instructions for the game.
+ *
+ * */
 The game is implement with 2 Classes : 
 - Pool
 - Tetromino
