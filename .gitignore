@@ -1,9 +1,0 @@
-*.pro.user
-build*
-template/*
-examples/*
-*.txt
-*.o
-*.exe
-*.json
-.autosave
